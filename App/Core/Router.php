@@ -1,26 +1,33 @@
 <?php
 namespace app\App\Core;
 
-class Router {
-    protected  $routes = [];
+use Exception;
 
-    public function addRoute($route, $controller, $action) {
+class Router {
+    protected array $routes = [];
+
+    public function addRoute($route, $controller, $action): void
+    {
         $this->routes[$route] = [
             'controller' => $controller,
             'action' => $action
         ];
     }
 
-    public function handleRequest($url) {
-        if (array_key_exists($url, $this->routes)) {
-            $controller = $this->routes[$url]['controller'];
-            $action = $this->routes[$url]['action'];
+    /**
+     * @throws Exception
+     */
+    public function dispatch($uri): void
+    {
+        if (array_key_exists($uri, $this->routes)) {
+            $controller = $this->routes[$uri]['controller'];
+            $action = $this->routes[$uri]['action'];
 
             $controller = new $controller();
             $controller->$action();
 
         } else {
-            throw new \Exception("No route found for URI: $url");
+            throw new Exception("No route found for URI: $uri");
         }
     }
 
