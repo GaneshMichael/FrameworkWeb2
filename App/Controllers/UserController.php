@@ -1,7 +1,6 @@
 <?php
 namespace app\App\Controllers;
 
-use app\App\Core\Controller;
 use app\App\Models\User;
 
 class UserController extends Controller
@@ -12,7 +11,7 @@ class UserController extends Controller
             new User('Jane Doe', 'John1@example.com'),
         ];
 
-        $this->render('user/index', ['users' => $users]);
+        $this->render('app\App\Views\user\index', ['users' => $users]);
 
     }
 
