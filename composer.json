@@ -1,5 +1,5 @@
 {
-    "name": "wap/mvc",
+    "name": "michael/wap-tcg",
     "description": "tcg game",
     "autoload": {
         "psr-4": {
