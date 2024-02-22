@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace TCG\Models;
 class User
 {
     public $name;
