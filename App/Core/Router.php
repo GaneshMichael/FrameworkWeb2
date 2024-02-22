@@ -1,5 +1,5 @@
 <?php
-namespace app\App\Core;
+namespace App\Core;
 
 use Exception;
 

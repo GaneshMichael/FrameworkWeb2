@@ -1,8 +1,9 @@
 <?php
 
-namespace app\App\Core;
+namespace App\Core;
 
-use app\App\Controllers\UserController;
+use App\Controllers\UserController;
+require_once __DIR__ . '/../../App/Core/Router.php';
 
 $router = new Router();
 

@@ -1,17 +1,18 @@
 <?php
-namespace app\App\Controllers;
+namespace App\Controllers;
 
-use app\App\Models\User;
+use Models\User;
 
 class UserController extends Controller
 {
-    public function index() {
+    public function index(): void
+    {
         $users = [
             new User('John Doe', 'John@example.com'),
             new User('Jane Doe', 'John1@example.com'),
         ];
 
-        $this->render('app\App\Views\user\index', ['users' => $users]);
+        $this->render('App\Views\user\index', ['users' => $users]);
 
     }
 

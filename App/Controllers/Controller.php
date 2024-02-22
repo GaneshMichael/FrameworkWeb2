@@ -1,9 +1,10 @@
 <?php
-namespace app\App\Controllers;
+namespace App\Controllers;
 
 class Controller
 {
-    protected function render($view, $data = []) {
+    protected function render($view, $data = []): void
+    {
         extract($data);
 
         include "Views/$view.php";

@@ -1,20 +1,9 @@
 <?php
 
-require_once '../App/Core/Router.php';
-use app\App\Core\Router;
+require_once __DIR__ . '/../vendor/autoload.php';
 
-require '../vendor/autoload.php';
+
+$router = require_once __DIR__ . '/../App/Core/Routes.php'; // Include route definitions
 
 $uri = $_SERVER['REQUEST_URI'];
-
-try {
-    $router = require '../App/Core/Routes.php';
-
-    if (!($router instanceof Router)) {
-        throw new Exception("Routes.php did not return a valid Router instance");
-    }
-
-    $router->dispatch($uri);
-} catch (Exception $e) {
-    echo 'Error: ' . $e->getMessage();
-}
+$router->dispatch($uri);
