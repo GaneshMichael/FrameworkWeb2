@@ -25,9 +25,14 @@ class Router {
         if ($callback === false) {
             return "Not found";
         }
-//        if (is_string($callback)) {
-//            return $this->renderVoew($view);
-//        }
+        if (is_string($callback)) {
+            return $this->renderView($callback);
+        }
         call_user_func($callback);
+    }
+
+    public function renderView($view)
+    {
+        include_once __DIR__ . "/../views/$view.php";
     }
 }

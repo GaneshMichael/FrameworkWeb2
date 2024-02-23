@@ -2,20 +2,13 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use App\Core\Application;
+use \App\Core\Application;
 
 $app = new  Application();
 
-$app->router->get('/', function () {
-require_once 'App/Views/home.php';
-});
-
-$app->router->get('/decks', function () {
-    require_once 'App/Views/decks.php';
-});
-
-$app->router->get('/cardDatabase', function () {
-    require_once 'App/Views/cardDatabase.php';
-});
+$app->router->get('/', 'home');
+$app->router->get('/decks', 'decks');
+$app->router->get('/cardDatabase', 'cardDatabase' );
+$app->router->get('/contact', 'contact' );
 
 $app->run();
