@@ -1,5 +1,5 @@
 <?php
-namespace TCG\Models;
+namespace App\Models;
 
 class LoginModel
 {

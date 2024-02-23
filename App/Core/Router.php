@@ -1,5 +1,5 @@
 <?php
-namespace TCG\Core;
+namespace App\Core;
 
 class Router {
     private array $routes = [];

@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Core;
+namespace App\Core;
 
 class Request
 {
