@@ -5,7 +5,6 @@ $viewDir = '/App/views/';
 
 switch ($request) {
     case '':
-
     case '/':
         require __DIR__ . $viewDir . 'home.php';
         break;
@@ -16,6 +15,14 @@ switch ($request) {
 
     case '/contact':
         require __DIR__ . $viewDir . 'contact.php';
+        break;
+
+    case '/cardDatabase':
+        require __DIR__ . $viewDir . 'cardDatabase.php';
+        break;
+
+    case '/decks':
+        require __DIR__ . $viewDir . 'decks.php';
         break;
 
     default:
