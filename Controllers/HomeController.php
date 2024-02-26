@@ -3,8 +3,9 @@
 namespace TCG\Controllers;
 
 use TCG\Core\Application;
+use TCG\Core\Controller;
 
-class HomeController
+class HomeController extends Controller
 {
     public function home()
     {
