@@ -1,5 +1,5 @@
 <?php
-namespace App\Core;
+namespace TCG\Core;
 
 class Router {
     private array $routes = [];
@@ -33,6 +33,22 @@ class Router {
 
     public function renderView($view)
     {
-        include_once __DIR__ . "/../views/$view.php";
+        $layout = $this->layoutContent();
+        $viewContent = $this->renderOnlyView($view);
+        return str_replace('{{content}}', $viewContent, $layout);
+    }
+
+    public function layoutContent()
+    {
+        ob_start();
+        include_once Application::$ROOT_DIR .  "/../views/layouts/base.php";
+        return ob_get_clean();
+    }
+
+    protected function renderOnlyView($view)
+    {
+        ob_start();
+        include_once Application::$ROOT_DIR . "/../views/$view.php";
+        return ob_get_clean();
     }
 }

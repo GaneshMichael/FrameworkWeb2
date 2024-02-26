@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use \App\Core\Application;
+use \TCG\Core\Application;
 
-$app = new  Application();
+$app = new  Application(__DIR__);
 
 $app->router->get('/', 'home');
 $app->router->get('/decks', 'decks');
