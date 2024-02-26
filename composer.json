@@ -3,7 +3,7 @@
     "description": "tcg game",
     "autoload": {
         "psr-4": {
-            "TCG\\": "App/"
+            "TCG\\": "./"
         }
     },
     "authors": [

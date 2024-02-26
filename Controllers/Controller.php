@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers;
+namespace TCG\Controllers;
 
 class Controller
 {

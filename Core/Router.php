@@ -4,51 +4,57 @@ namespace TCG\Core;
 class Router {
     private array $routes = [];
     public Request $request;
+    public Response $response;
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
+        $this->response = $response;
     }
 
     public function get($path, $callback): void
     {
         $this->routes['get'][$path] = $callback;
     }
-
+    public function post($path, $callback): void
+    {
+        $this->routes['post'][$path] = $callback;
+    }
 
     public function resolve()
     {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
-        $callback = $this->routes[$method][$path];
+        $callback = $this->routes[$method][$path] ?? false;
 
         if ($callback === false) {
-            return "Not found";
+            Application::$app->response->setStatusCode(404);
+            return  "not found";
         }
         if (is_string($callback)) {
             return $this->renderView($callback);
         }
-        call_user_func($callback);
+        return call_user_func($callback);
     }
 
     public function renderView($view)
     {
-        $layout = $this->layoutContent();
+        $layoutContent = $this->layoutContent();
         $viewContent = $this->renderOnlyView($view);
-        return str_replace('{{content}}', $viewContent, $layout);
+        return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    public function layoutContent()
+    protected function layoutContent()
     {
         ob_start();
-        include_once Application::$ROOT_DIR .  "/../views/layouts/base.php";
+        include_once Application::$ROOT_DIR . "/Views/Layouts/base.php";
         return ob_get_clean();
     }
 
     protected function renderOnlyView($view)
     {
         ob_start();
-        include_once Application::$ROOT_DIR . "/../views/$view.php";
+        include_once Application::$ROOT_DIR . "/Views/$view.php";
         return ob_get_clean();
     }
 }

@@ -11,7 +11,7 @@ class Request
         if ($position === false) {
             return $path;
         }
-        $path = substr($path, 0, $position);
+        return substr($path, 0, $position);
     }
 
     public function getMethod(): string
