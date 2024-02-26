@@ -14,8 +14,9 @@ class AuthController extends Controller
         $registerModel = new RegisterModel();
 
         if ($request->isPost()) {
-
             $registerModel->loadData($request->getBody());
+
+            var_dump($registerModel);
 
             if ($registerModel->validate() && $registerModel->register()) {
                 return 'Success';
