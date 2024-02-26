@@ -1,33 +1,18 @@
 <?php
 
-$request = $_SERVER['REQUEST_URI'];
-$viewDir = '/App/views/';
+require_once __DIR__ . '/vendor/autoload.php';
 
-var_dump($request);
-var_dump($_SERVER);
-switch ($request) {
-    case '':
-    case '/':
-        require __DIR__ . $viewDir . 'home.php';
-        break;
+use TCG\Controllers\HomeController;
+use TCG\Controllers\SiteController;
+use TCG\Core\Application;
 
-    case '/users':
-        require __DIR__ . $viewDir . 'users.php';
-        break;
+$app = new Application((__DIR__));
 
-    case '/contact':
-        require __DIR__ . $viewDir . 'contact.php';
-        break;
+$app->router->get('/', [HomeController::class, 'home']);
+$app->router->get('/decks', 'decks');
+$app->router->get('/cardDatabase', 'cardDatabase' );
+$app->router->get('/contact', [SiteController::class, 'contact'] );
+$app->router->get('/login', 'Login' );
+$app->router->post('/contact', [SiteController::class, 'handleContact']);
 
-    case '/cardDatabase':
-        require __DIR__ . $viewDir . 'cardDatabase.php';
-        break;
-
-    case '/decks':
-        require __DIR__ . $viewDir . 'decks.php';
-        break;
-
-    default:
-        http_response_code(404);
-        require __DIR__ . $viewDir . '404.php';
-}
+$app->run();
