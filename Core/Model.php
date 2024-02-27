@@ -9,7 +9,7 @@ abstract class Model
     public const RULE_MIN = "" ;
     public const RULE_MAX = "" ;
     public const RULE_MATCH = "" ;
-    
+
 
     public function loadData($data)
     {
