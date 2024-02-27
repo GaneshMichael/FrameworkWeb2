@@ -4,19 +4,17 @@ namespace TCG\Models;
 
 use TCG\Core\Model;
 
-class registerModel extends Model
+class RegisterModel extends Model
 {
-    public const RULE_REQUIRED = "" ;
-
-    public string $firstname;
-    public string $lastname;
-    public string $email;
-    public string $password;
-    public string $confirmPassword;
+    public string $firstname = '';
+    public string $lastname = '';
+    public string $email = '';
+    public string $password = '';
+    public string $confirmPassword = '';
 
     public function register()
     {
-        echo 'Creating new user';
+        return 'Creating new user';
     }
 
     public function rules(): array

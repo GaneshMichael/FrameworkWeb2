@@ -4,11 +4,11 @@ namespace TCG\Core;
 
 abstract class Model
 {
-    public const RULE_REQUIRED = "" ;
-    public const RULE_EMAIL = "" ;
-    public const RULE_MIN = "" ;
-    public const RULE_MAX = "" ;
-    public const RULE_MATCH = "" ;
+    public const RULE_REQUIRED = "required" ;
+    public const RULE_EMAIL = "email" ;
+    public const RULE_MIN = "min" ;
+    public const RULE_MAX = "max" ;
+    public const RULE_MATCH = "match" ;
 
 
     public function loadData($data)
@@ -19,6 +19,10 @@ abstract class Model
             }
         }
     }
+
+    abstract public function rules() :array ;
+
+    public array $errors = [];
     public function validate()
     {
         foreach ($this->rules() as $attribute => $rules) {
@@ -66,5 +70,15 @@ abstract class Model
             self::RULE_MAX => 'Max length of this field must be {max}',
             self::RULE_MATCH => 'This field must be the same as {match}',
         ];
+    }
+
+    public function hasError($attribute)
+    {
+        return $this->errors[$attribute] ?? false;
+    }
+
+    public function getFirstError($attribute)
+    {
+        return $this->errors[$attribute][0] ?? false;
     }
 }

@@ -1,26 +1,13 @@
 <h1>Register</h1>
 
-<form action="" method="post">
-    <div class="form-group">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" name="firstname">
-    </div>
-    <div class="form-group">
-        <label class="form-label">Lastname</label>
-        <input type="text" class="form-control" name="lastname">
-    </div>
-    <div class="form-group">
-        <label>Email address</label>
-        <input type="text" class="form-control" name="email" " aria-describedby="emailHelp">
-    </div>
-    <div class="form-group">
-        <label >Password</label>
-        <input type="text" class="form-control" name="password">
-    </div>
-    <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="text" class="form-control" name="confirmPassword">
-    </div>
+<?php $form = TCG\Core\form\Form::begin('', 'post')  ?>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<?php echo $form->field($model, 'firstname') ?>
+<?php echo $form->field($model, 'lastname') ?>
+<?php echo $form->field($model, 'email') ?>
+<?php echo $form->field($model, 'password') ?>
+<?php echo $form->field($model, 'confirmPassword') ?>
+
+<button type="submit" class="btn btn-primary">Submit</button>
+
+<?php echo TCG\Core\form\Form::end() ?>

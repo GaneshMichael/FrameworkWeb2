@@ -4,7 +4,7 @@ namespace TCG\Controllers;
 
 use TCG\Core\Controller;
 use TCG\Core\Request;
-use TCG\Models\registerModel;
+use TCG\Models\RegisterModel;
 
 class AuthController extends Controller
 {
@@ -15,8 +15,6 @@ class AuthController extends Controller
 
         if ($request->isPost()) {
             $registerModel->loadData($request->getBody());
-
-            var_dump($registerModel);
 
             if ($registerModel->validate() && $registerModel->register()) {
                 return 'Success';
@@ -34,7 +32,6 @@ class AuthController extends Controller
 
     public function login()
     {
-        $this->setLayout('auth');
         return $this->render('login');
     }
 
