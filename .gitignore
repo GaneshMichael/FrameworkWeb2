@@ -1,5 +1,5 @@
 .idea/
 .env
 /vendor/
-/.env.example
+.env.example
 DataBase.sqlite
