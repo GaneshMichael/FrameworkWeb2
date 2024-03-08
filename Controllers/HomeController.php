@@ -12,6 +12,7 @@ class HomeController extends Controller
         $params = [
             'name' => "The Card Game",
         ];
+
         return Application::$app->router->renderView('home', $params);
     }
 }
