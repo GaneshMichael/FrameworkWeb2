@@ -13,10 +13,14 @@ CREATE TABLE 'users' (
     'updates_by'
     );
 
-INSERT INTO 'users' (
-    '',
-)
 
 CREATE TABLE 'cards' (
-    ''
+    'id' int(11) NOT NULL,
+    'name' varchar(255) NOT NULL,
+    'description' text NOT NULL,
+    'status' tinyint(4) NOT NULL,
+    'created_at',
+    'updated_at',
+    'updates_by'
+    );
 )
