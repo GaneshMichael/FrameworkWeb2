@@ -2,6 +2,8 @@
 
 namespace TCG\Core;
 
+use TCG\Models\UserModel;
+
 class Application
 {
     public static string $ROOT_DIR;
@@ -10,6 +12,8 @@ class Application
     public Response $response;
     public static Application $app;
     public Controller $controller;
+    public ?UserModel $user = null;
+
     public function __construct($rootPath)
     {
         self::$ROOT_DIR = $rootPath;

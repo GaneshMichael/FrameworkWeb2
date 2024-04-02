@@ -49,7 +49,7 @@ abstract class DatabaseModel extends Model
         return ($result !== false) ? $result : null;
     }
 
-    public function save()
+    public function save(): bool
     {
         $tableName = static::tableName();
         $attributes = $this->attributes();
@@ -66,7 +66,7 @@ abstract class DatabaseModel extends Model
         return $statement->execute();
     }
 
-    public function update()
+    public function update(): bool
     {
         $tableName = static::tableName();
         $primaryKey = $this->primaryKey();
@@ -93,7 +93,7 @@ abstract class DatabaseModel extends Model
 
     abstract public function primaryKey(): string;
 
-    public function delete()
+    public function delete(): bool
     {
         $tableName = static::tableName();
         $primaryKey = $this->primaryKey();
@@ -102,7 +102,7 @@ abstract class DatabaseModel extends Model
         return $statement->execute();
     }
 
-    public function loadData($data)
+    public function loadData($data): static
     {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {

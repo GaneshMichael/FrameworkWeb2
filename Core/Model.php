@@ -2,6 +2,9 @@
 
 namespace TCG\Core;
 
+use Exception;
+use TCG\Utils\Validation;
+
 abstract class Model
 {
     abstract public function rules(): array;
@@ -13,6 +16,9 @@ abstract class Model
 
     public array $errors = [];
 
+    /**
+     * @throws Exception
+     */
     public function validate(): bool
     {
         $this->errors = [];
@@ -34,7 +40,7 @@ abstract class Model
                         $this->addError($attribute, Validation::getErrorMessage($ruleName));
                     }
                 } else {
-                    throw new \Exception("Validation rule '{$ruleName}' is not a valid callback.");
+                    throw new Exception("Validation rule '{$ruleName}' is not a valid callback.");
                 }
             }
         }
@@ -42,7 +48,7 @@ abstract class Model
         return empty($this->errors);
     }
 
-    public function addError(string $attribute, string $message)
+    public function addError(string $attribute, string $message): void
     {
         $this->errors[$attribute][] = $message;
     }
