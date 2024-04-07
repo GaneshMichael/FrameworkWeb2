@@ -2,7 +2,7 @@
 
 namespace TCG\Utils;
 
-use TCG\Database\DbConnect;
+use TCG\Database\Database;
 
 class Validation
 {
@@ -44,7 +44,7 @@ class Validation
 
     public static function unique($value, $params)
     {
-        $db = DbConnect::getConnection();
+        $db = Database::getConnection();
         $className = $params['class'];
         $uniqueAttr = $params['attribute'];
         $tableName = $className::tableName();

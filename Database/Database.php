@@ -23,4 +23,10 @@ class Database {
             echo "Connection failed: " . $e->getMessage();
         }
     }
+
+    public function getConnection(): PDO
+    {
+        return $this->pdo;
+    }
+
 }
