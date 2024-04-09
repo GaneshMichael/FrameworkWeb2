@@ -1,6 +1,7 @@
 <?php
 
 use TCG\Controllers\AuthController;
+use TCG\Controllers\CardController;
 use TCG\Controllers\DashboardController;
 use TCG\Controllers\DeckController;
 use TCG\Controllers\HomeController;
@@ -19,4 +20,6 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 
 // Decks and Cards
 $app->router->get('/decks', [DeckController::class, 'index']);
-$app->router->get('/cardDatabase', [DeckController::class, 'index']);
+$app->router->get('/cardDatabase', [CardController::class, 'index']);
+
+// Admin

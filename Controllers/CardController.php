@@ -9,7 +9,7 @@ class CardController extends Controller
 {
     public function index()
     {
-        $this->view->title = 'Decks';
+        $this->view->title = 'Card database';
         if (Application::$app->user) {
             $this->view->render('cardDatabase', [], 'auth');
         } else {
