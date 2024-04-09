@@ -1,70 +1,102 @@
 <?php
+
 namespace TCG\Core;
 
 class Router {
-    private array $routes = [];
-    public Request $request;
-    public Response $response;
+    protected array $routes = [];
 
-    public function __construct(Request $request, Response $response)
+    public function get($path, $callback, $middleware = null): void
     {
-        $this->request = $request;
-        $this->response = $response;
+        $this->routes['get'][$path] = [
+            'callback' => $callback,
+            'middleware' => $middleware,
+        ];
+    }
+    public function post($path, $callback, $middleware = null): void
+    {
+        $this->routes['post'][$path] = [
+            'callback' => $callback,
+            'middleware' => $middleware,
+        ];
     }
 
-    public function get($path, $callback): void
+    public function resolve(Request $request): void
     {
-        $this->routes['get'][$path] = $callback;
-    }
-    public function post($path, $callback): void
-    {
-        $this->routes['post'][$path] = $callback;
-    }
+        $path = $request->getPath();
+        $method = $request->method();
+        $route = $this->routes[$method][$path] ?? null;
 
-    public function resolve()
-    {
-        $path = $this->request->getPath();
-        $method = $this->request->method();
-        $callback = $this->routes[$method][$path] ?? false;
-
-        if ($callback === false) {
-            Application::$app->response->setStatusCode(404);
-            return $this->renderView("404");
+        if ($route === null) {
+            if ($path === '/404') {
+                $view = new View();
+                if (Application::$app->user) {
+                    echo $view->render('404', [], 'auth');
+                } else {
+                    echo $view->render('404', [], 'base');
+                }
+            } else {
+                Application::$app->response->redirect('/404');
+            }
+            return;
         }
-        if (is_string($callback)) {
-            return $this->renderView($callback);
-        }
-        if (is_array($callback)) {
-            Application::$app->controller = new $callback[0]();
-            $callback[0] = Application::$app->controller;
+
+        $middlewares = $this->getMiddlewares($route['middleware']);
+        $resolvedMiddlewares = $this->resolveMiddlewares($middlewares);
+
+        $response = $this->executeMiddlewares($resolvedMiddlewares, $request, new Response());
+
+        if ($response !== null) {
+            $response->send();
+            return;
         }
 
-        return call_user_func($callback, $this->request);
+        $callback = $route['callback'];
+
+        if ($callback instanceof \Closure) {
+            $callback($request, new Response());
+        } else {
+            $controller = $callback[0];
+            $method = $callback[1];
+
+            if (is_string($controller)) {
+                $controller = new $controller;
+            }
+            $controller->$method($request, new Response());
+        }
     }
 
-    public function renderView($view, $params = [])
+    public function getMiddlewares($middleware): array
     {
-
-        $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view, $params);
-        return str_replace('{{content}}', $viewContent, $layoutContent);
-    }
-
-    protected function layoutContent()
-    {
-        $layout = Application::$app->controller->layout;
-        ob_start();
-        include_once Application::$ROOT_DIR . "/Views/Layouts/$layout.php";
-        return ob_get_clean();
-    }
-
-    protected function renderOnlyView($view, $params)
-    {
-        foreach ($params as $key => $value) {
-            $$key = $value;
+        if (is_array($middleware)) {
+            return $middleware;
+        } elseif ($middleware !== null) {
+            return [$middleware];
         }
-        ob_start();
-        include_once Application::$ROOT_DIR . "/Views/$view.php";
-        return ob_get_clean();
+
+        return [];
+    }
+
+    private function resolveMiddlewares(array $middlewares): array
+    {
+        $resolvedMiddlewares = [];
+
+        foreach ($middlewares as $middleware) {
+            $resolvedMiddlewares[] = new $middleware();
+        }
+
+        return $resolvedMiddlewares;
+    }
+
+    public function executeMiddlewares(array $middlewares, Request $request, Response $response): ?Response
+    {
+        foreach ($middlewares as $middleware) {
+            $response = $middleware->handle($request, $response);
+
+            if ($response !== null) {
+                return $response;
+            }
+        }
+
+        return null;
     }
 }

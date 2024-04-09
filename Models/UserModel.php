@@ -92,7 +92,7 @@ class UserModel extends DatabaseModel
         return false;
     }
 
-    public function update()
+    public function update(): bool
     {
         $this->updated_by = Application::$app->user->id;
         $this->updated_at = date('Y-m-d H:i:s');

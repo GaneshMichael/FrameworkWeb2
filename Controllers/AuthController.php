@@ -2,37 +2,83 @@
 
 namespace TCG\Controllers;
 
+use TCG\Core\Application;
+use TCG\Core\Auth;
 use TCG\Core\Controller;
+use TCG\Core\MiddleWares\AuthMiddleware;
 use TCG\Core\Request;
-use TCG\Models\RegisterModel;
+use TCG\Core\Response;
+use TCG\Core\View;
+use TCG\Models\LoginModel;
+use TCG\Models\UserModel;
 
 class AuthController extends Controller
 {
+    protected Auth $auth;
 
-    public function register(Request $request)
+    public function __construct()
     {
-        $registerModel = new RegisterModel();
+        $this->auth = new Auth();
+        parent::__construct();
+        $this->registerMiddleware(new AuthMiddleware());
+    }
+
+    public function login(Request $request): View
+    {
+        $loginModel = new LoginModel();
+        $errorMessage = '';
 
         if ($request->isPost()) {
-            $registerModel->loadData($request->getBody());
+            $loginModel->loadData($request->getBody());
 
-            if ($registerModel->validate() && $registerModel->register()) {
-                return 'Success';
+            if ($loginModel->validate() && $loginModel->login()) {
+                Application::$app->session->setFlash('success', 'Succesvol ingelogd.');
+                return $this->redirect('/dashboard');
+            } else {
+                $errorMessage = 'Ongeldige inloggegevens. Probeer het opnieuw.';
             }
-
-            return $this->render('register', [
-                'model' => $registerModel
-            ]);
         }
-        $this->setLayout('auth');
-        return $this->render('register', [
-            'model' => $registerModel
+
+        $this->view->title = 'Inloggen';
+        $this->view->render('login', [
+            'model' => $loginModel,
+            'errorMessage' => $errorMessage,
         ]);
+
+        return $this->view;
     }
 
-    public function login()
+    public function register(Request $request, Response $response)
     {
-        return $this->render('login');
+        $user = new UserModel();
+        $user->scenario = 'register';
+        $user->loadData($request->getBody());
+
+        if ($request->isPost()) {
+            $isValidationSuccessful = $user->validate();
+
+            if ($isValidationSuccessful && $user->register()) {
+                Application::$app->session->setFlash('success', 'Account succesvol aangemaakt.');
+                return $response->redirect('/dashboard');
+            } else {
+                Application::$app->session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
+            }
+        }
+        if (Application::$app->user) {
+            return $this->view->render('register', [
+                'model' => $user
+            ], 'auth');
+        } else {
+            return $this->view->render('register', [
+                'model' => $user
+            ], 'base');
+        }
     }
 
+    public function logout()
+    {
+        Application::$app->user = null;
+        Application::$app->session->remove('user');
+        return $this->redirect('/login');
+    }
 }

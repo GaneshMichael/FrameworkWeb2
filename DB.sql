@@ -1,6 +1,5 @@
 
-
-CREATE TABLE 'users' (
+CREATE TABLE IF NOT EXISTS 'users' (
     'id' int(11) NOT NULL,
     'name' varchar(255) NOT NULL,
     'lastname' varchar(255) NOT NULL,
@@ -14,7 +13,7 @@ CREATE TABLE 'users' (
     );
 
 
-CREATE TABLE 'cards' (
+CREATE TABLE IF NOT EXISTS 'cards' (
     'id' int(11) NOT NULL,
     'name' varchar(255) NOT NULL,
     'description' text NOT NULL,
@@ -23,4 +22,3 @@ CREATE TABLE 'cards' (
     'updated_at',
     'updates_by'
     );
-)

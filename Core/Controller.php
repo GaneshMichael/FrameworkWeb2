@@ -2,17 +2,32 @@
 
 namespace TCG\Core;
 
+use TCG\Core\MiddleWares\BaseMiddleware;
+
 class Controller
 {
-    public string $layout = 'base';
-    public function render($view, $params = [])
+    protected array $middlewares = [];
+    protected ?View $view = null;
+
+    public function __construct()
     {
-        return Application::$app->router->renderView($view, $params);
+        $this->view = new View();
     }
 
-    public function setLayout($layout)
+    public function registerMiddleware(BaseMiddleware $middleware): void
     {
-        $this->layout = $layout;
+        $this->middlewares[] = $middleware;
+    }
+
+    public function getMiddlewares(): array
+    {
+        return $this->middlewares;
+    }
+
+    protected function redirect(string $url)
+    {
+        header('Location: ' . $url);
+        exit;
     }
 
 }

@@ -6,35 +6,33 @@ use TCG\Models\UserModel;
 
 class Application
 {
-    public static string $ROOT_DIR;
+
+    public static Application $app;
     public Router $router;
     public Request $request;
     public Response $response;
-    public static Application $app;
-    public Controller $controller;
+    public Session $session;
     public ?UserModel $user = null;
 
-    public function __construct($rootPath)
+    public function __construct(Router $router, Request $request, Response $response, Session $session, UserModel $user = null)
     {
-        self::$ROOT_DIR = $rootPath;
         self::$app = $this;
-        $this->response = new Response;
-        $this->request = new Request;
-        $this->router = new Router($this->request, $this->response);
+        $this->router = $router;
+        $this->request = $request;
+        $this->response = $response;
+        $this->session = $session;
+        $this->user = $user;
     }
 
     public function run()
     {
-        echo $this->router->resolve();
-    }
+        try {
+            $this->router->resolve($this->request);
+        } catch (\Exception $e) {
+            $this->response->setStatusCode((int)$e->getCode());
+            $this->response->setContent($e->getMessage());
+        }
 
-    public function getController()
-    {
-        return $this->controller;
-    }
-
-    public function setController($controller)
-    {
-        $this->controller = $controller;
+        $this->response->send();
     }
 }

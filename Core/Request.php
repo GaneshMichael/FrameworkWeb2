@@ -46,4 +46,15 @@ class Request
         return $body;
     }
 
+    public function getUri()
+    {
+        return $_SERVER['REQUEST_URI'];
+    }
+
+    public function getQueryParams(): array
+    {
+        return $_GET;
+    }
+
+
 }

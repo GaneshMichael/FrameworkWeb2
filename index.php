@@ -1,28 +1,29 @@
 <?php
 
+use TCG\Core\Application;
+use TCG\Core\Request;
+use TCG\Core\Router;
+use TCG\Core\Response;
+use TCG\Core\Session;
+use TCG\Models\UserModel;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
-use TCG\Controllers\AuthController;
-use TCG\Controllers\HomeController;
-use TCG\Controllers\SiteController;
-use TCG\Core\Application;
+$request = new Request();
+$response = new Response();
+$router = new Router();
+$session = new Session();
 
-$app = new Application((__DIR__));
+$user = null;
+$primaryValue = $session->getSessionUser();
+if ($primaryValue) {
+    $userInstance = new UserModel();
+    $primaryKey = $userInstance->primaryKey();
+    $user = UserModel::findOne([$primaryKey => $primaryValue]);
+}
 
-$app->router->get('/', [HomeController::class, 'home']);
+$app = new Application($router, $request, $response, $session, $user);
 
-$app->router->get('/decks', [SiteController::class, 'decks'] );
-$app->router->get('/cardDatabase', [SiteController::class, 'cardDatabase'] );
-
-$app->router->get('/contact', [SiteController::class, 'contact'] );
-$app->router->post('/contact', [SiteController::class, 'handleContact']);
-
-$app->router->get('/login', [AuthController::class, 'login'] );
-$app->router->post('/login', [AuthController::class, 'login'] );
-
-$app->router->get('/register', [AuthController::class, 'register'] );
-$app->router->post('/register', [AuthController::class, 'register'] );
-
-
+require_once __DIR__ . '/Routes/Routes.php';
 
 $app->run();
