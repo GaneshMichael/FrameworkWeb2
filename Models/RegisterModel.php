@@ -28,4 +28,10 @@ class RegisterModel extends Model
         ];
     }
 
+    public function primaryKey(): string
+    {
+        return 'id';
+    }
+
+
 }

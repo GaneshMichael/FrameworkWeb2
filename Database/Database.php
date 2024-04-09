@@ -13,7 +13,7 @@ class Database implements DatabaseConnection
 
     protected function __construct()
     {
-        $db = '\TCG.sqlite';
+        $db = 'TCG.sqlite';
         try {
             $this->pdo = new PDO("sqlite:$db");
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

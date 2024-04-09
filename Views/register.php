@@ -44,16 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="confirmPassword">Wachtwoord bevestigen</label>
         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value="<?= $model->confirmPassword ?>" required>
     </div>
-<!--    <div class="form-group">-->
-<!--        <label for="role">Rol</label>-->
-<!--        <select class="form-control" required id="role" name="role">-->
-<!--            <option value="Free" --><?php //= $model->role === 'Free' ? 'selected' : '' ?><!--></option>
-<!--            --><?php //if (Auth::isAdmin()) { ?>
-<!--                <option value="docent" --><?php //= $model->role === 'docent' ? 'selected' : '' ?><!--></option>
-<!--                <option value="beheerder" --><?php //= $model->role === 'beheerder' ? 'selected' : '' ?><!--></option>
-<!--            --><?php //} ?>
-<!--        </select>-->
-<!--    </div>-->
+    <div class="form-group">
+        <label for="role">Rol</label>
+        <select class="form-control" required id="role" name="role">
+            <option value="Free" <?= $model->role === 'Free' ? 'selected' : '' ?>>Free</option>
+            <?php if (Auth::isAdmin()) { ?>
+                <option value="docent" <?= $model->role === 'docent' ? 'selected' : '' ?>>Docent</option>
+                <option value="beheerder" <?= $model->role === 'beheerder' ? 'selected' : '' ?>>Beheerder</option>
+            <?php } ?>
+        </select>
+    </div>
     <br>
     <button type="submit" class="btn btn-primary">Aanmaken</button>
 </form>
