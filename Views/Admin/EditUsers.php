@@ -25,7 +25,7 @@ if (!$user) {
 ?>
 
 <h1 class="text-center">Gebruiker wijzigen</h1>
-<form method="post" action="/admin/update?id=<?= $id ?>">
+<form method="post" action="/admin/users/update?id=<?= $id ?>">
     <div class="form-group">
         <label for="firstName">Voornaam</label>
         <input type="text" id="firstName" name="firstName" value="<?= $user->firstName ?>" required class="form-control">

@@ -34,7 +34,7 @@ class AdminController extends Controller
     $user = UserModel::findOne(['id' => $id]);
 
     if (!Auth::isAdmin()) {
-        $response->redirect('/admin/users');
+        $response->redirect('Admin/users');
     }
 
     if ($user === null) {
@@ -44,7 +44,7 @@ class AdminController extends Controller
     }
 
     $this->view->title = 'Admin';
-    $this->view->render('Admin/Edit', [
+    $this->view->render('Admin/EditUsers', [
         'model' => $user,
     ], 'auth');
     }
@@ -99,6 +99,16 @@ class AdminController extends Controller
         }
 
         $response->redirect('/admin/users');
+    }
+
+
+    public function cardIndex()
+    {
+        $cards = CardModel::findAllObjects();
+        $this->view->title = 'kaarten';
+        $this->view->render('Admin/cards', [
+            'cards' => $cards
+        ], 'auth');
     }
 
     public function addCards(Request $request, Response $response)
