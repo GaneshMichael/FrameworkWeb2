@@ -10,12 +10,20 @@ class Auth
         return !Application::$app->user;
     }
 
-    public static function isStudent(): bool
+    public static function isFree(): bool
     {
         if (self::isGuest()) {
             return false;
         }
-        return Application::$app->user->role === 'free';
+        return Application::$app->user->role === 'Free';
+    }
+
+    public static function isPremium(): bool
+    {
+        if (self::isGuest()) {
+            return false;
+        }
+        return Application::$app->user->role === 'Premium';
     }
 
     public static function isAdmin(): bool
@@ -23,15 +31,7 @@ class Auth
         if (self::isGuest()) {
             return false;
         }
-        return Application::$app->user->role === 'premium';
-    }
-
-    public static function isTeacher(): bool
-    {
-        if (self::isGuest()) {
-            return false;
-        }
-        return Application::$app->user->role === 'admin';
+        return Application::$app->user->role === 'Beheerder';
     }
 
     public static function login(UserModel $user)

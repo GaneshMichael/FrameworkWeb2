@@ -16,4 +16,9 @@ class CardController extends Controller
             $this->view->render('cardDatabase', [], 'base');
         }
     }
+
+    public function createCard()
+    {
+
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace TCG\Controllers;
+use TCG\Core\Application;
 use TCG\Core\Controller;
 use TCG\Core\Request;
 
@@ -8,23 +9,22 @@ class SiteController extends Controller
 {
     public function contact()
     {
-        return $this->render('contact');
-    }
-    public function handleContact(Request $request)
-    {
-        $body = $request->getBody();
-
-        return 'Handling submitted data';
-    }
-
-    public function decks()
-    {
-        return $this->render('decks');
+        $this->view->title = 'Contact us';
+        if (Application::$app->user) {
+            $this->view->render('contact', [], 'auth');
+        } else {
+            $this->view->render('contact', [], 'base');
+        }
     }
 
-    public function cardDatabase()
+    public function premium()
     {
-        return $this->render('cardDatabase');
+        $this->view->title = 'Premium';
+        if (Application::$app->user) {
+            $this->view->render('GetPremium', [], 'auth');
+        } else {
+            $this->view->render('GetPremium', [], 'base');
+        }
     }
 
 }

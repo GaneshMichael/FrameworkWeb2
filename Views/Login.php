@@ -1,18 +1,34 @@
-<h1>Login</h1>
+<?php
 
-<form action="" method="post">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+/** @var $model \TCG\Models\UserModel */
+
+?>
+
+<h1 class="text-center">Inloggen</h1>
+
+<?php if (!empty($model->errors)) : ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach ($model->errors as $attribute => $errors) : ?>
+                <?php foreach ($errors as $error) : ?>
+                    <li><?= $error ?></li>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        </ul>
     </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+<?php endif; ?>
+
+<div class="alert alert-info">
+    <p>Geen account? <a href="/register">Registreer hier</a>.</p>
+</div>
+<form method="post">
+    <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" class="form-control" value="<?php echo $model->email ?>" required>
     </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <div class="form-group">
+        <label for="password">Wachtwoord</label>
+        <input type="password" name="password" id="password" class="form-control" required>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Inloggen</button>
 </form>

@@ -48,10 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="role">Rol</label>
         <select class="form-control" required id="role" name="role">
             <option value="Free" <?= $model->role === 'Free' ? 'selected' : '' ?>>Free</option>
-            <?php if (Auth::isAdmin()) { ?>
-                <option value="docent" <?= $model->role === 'docent' ? 'selected' : '' ?>>Docent</option>
-                <option value="beheerder" <?= $model->role === 'beheerder' ? 'selected' : '' ?>>Beheerder</option>
-            <?php } ?>
+            <option value="Premium" <?= $model->role === 'Premium' ? 'selected' : '' ?>>Premium</option>
         </select>
     </div>
     <br>

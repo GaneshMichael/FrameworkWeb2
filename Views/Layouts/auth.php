@@ -19,23 +19,44 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 </head>
 <body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">WAP-2</a>
+    <a class="navbar-brand" href="/">TCG</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <?php if (!Auth::isGuest()) : ?>
-        <div class="navbar-nav ml-auto">
-            <div class="nav-item dropdown">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/decks">Decks</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cardDatabase">Card Database</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/contact">Contact us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <?php if (Auth::isFree()) :?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/premium"> Get premium</a>
+                    </li>
+                <?php endif; ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php echo $user->displayName() ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/profile">Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logout">Log uit</a>
-                </div>
-            </div>
+            </ul>
+
         </div>
     <?php endif; ?>
 </nav>
+
+<div class="container">
+    {{content}}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+</body>
 </html>

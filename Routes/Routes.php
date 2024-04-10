@@ -5,11 +5,14 @@ use TCG\Controllers\CardController;
 use TCG\Controllers\DashboardController;
 use TCG\Controllers\DeckController;
 use TCG\Controllers\HomeController;
+use TCG\Controllers\SiteController;
 use TCG\Core\MiddleWares\AuthMiddleware;
 
 //    Site
 $app->router->get('/', [HomeController::class, 'index']);
 $app->router->get('/dashboard', [DashboardController::class, 'index'], AuthMiddleware::class);
+$app->router->get('/contact', [SiteController::class, 'contact']);
+$app->router->get('/premium', [SiteController::class, 'premium']);
 
 // AUTH
 $app->router->get('/login', [AuthController::class, 'login']);

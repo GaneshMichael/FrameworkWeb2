@@ -2,9 +2,10 @@
 
 namespace TCG\Models;
 
-use TCG\Core\Model;
+use TCG\Database\DatabaseModel;
+use TCG\Utils\Validation;
 
-class RegisterModel extends Model
+class RegisterModel extends DatabaseModel
 {
     public string $firstname = '';
     public string $lastname = '';
@@ -20,11 +21,11 @@ class RegisterModel extends Model
     public function rules(): array
     {
         return [
-            'firstname' => [self::RULE_REQUIRED],
-            'lastname' => [self::RULE_REQUIRED],
-            'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
-            'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 10], [self::RULE_MAX, 'max' => 24]],
-            'confirmPassword' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']],
+            'firstname' => [Validation::RULE_REQUIRED],
+            'lastname' => [Validation::RULE_REQUIRED],
+            'email' => [Validation::RULE_REQUIRED, Validation::RULE_EMAIL],
+            'password' => [Validation::RULE_REQUIRED, [Validation::RULE_MIN, 'min' => 10], [Validation::RULE_MAX, 'max' => 24]],
+            'confirmPassword' => [Validation::RULE_REQUIRED, [Validation::RULE_MATCH, 'match' => 'password']],
         ];
     }
 
@@ -34,4 +35,13 @@ class RegisterModel extends Model
     }
 
 
+    #[\Override] public static function tableName(): string
+    {
+        return 'registrations';
+    }
+
+    #[\Override] public function attributes(): array
+    {
+        return ['firstname', 'lastname', 'email', 'password'];
+    }
 }

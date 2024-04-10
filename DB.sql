@@ -9,20 +9,32 @@ CREATE TABLE IF NOT EXISTS 'users' (
     'status' tinyint(4) NOT NULL,
     'created_at' timestamp  DEFAULT current_timestamp,
     'updated_at' timestamp DEFAULT '0000-00-00 00:00:00',
-    'updated_by'  timestamp DEFAULT '0000-00-00 00:00:00',
+    'updated_by'  timestamp DEFAULT '0000-00-00 00:00:00'
 
-    PRIMARY KEY (ID AUTOINCREMENT)
+    PRIMARY KEY(id AUTOINCREMENT)
     );
 
 CREATE TABLE IF NOT EXISTS 'cards' (
     'id' int(11) NOT NULL,
     'name' varchar(255) NOT NULL,
     'description' text NOT NULL,
-    'status' tinyint(4) NOT NULL,
-    'created_at',
-    'updated_at',
-    'updates_by'
+    'power' int(11) NOT NULL,
+    'defense' int(11) NOT NULL,
+    'rarity' varchar(255) NOT NULL,
+    'type' varchar(255) NOT NULL,
+    'set' varchar(255) NOT NULL,
+    'marketValue' int(11) NOT NULL,
+    'created_at' timestamp DEFAULT current_timestamp,
+    'updated_at' timestamp DEFAULT '0000-00-00 00:00:00',
+    'updates_by' timestamp DEFAULT '0000-00-00 00:00:00'
     );
+
+CREATE TABLE IF NOT EXISTS 'set' (
+    'id' int(11) NOT NULL,
+    'name' varchar(255) NOT NULL,
+    'description' text NOT NULL
+    );
+
 
 -- INSERT INTO `users` (`email`, `password`, `firstName`, `lastName`, `role`, `status`, `created_at`, `updated_by`, `updated_at`) VALUES
 -- ('test@test.nl', '$2y$10$0nEMgkhCer0hREevnP37weaQseCWwub2nB6RJb1BDqqQ526jurPsa', 'test', 'test', 'Free', 0, '2024-04-09 23:30:07', 0, '0000-00-00 00:00:00'),
