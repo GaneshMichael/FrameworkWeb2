@@ -1,5 +1,6 @@
 <?php
 
+use TCG\Controllers\AdminController;
 use TCG\Controllers\AuthController;
 use TCG\Controllers\CardController;
 use TCG\Controllers\DashboardController;
@@ -26,3 +27,4 @@ $app->router->get('/decks', [DeckController::class, 'index']);
 $app->router->get('/cardDatabase', [CardController::class, 'index']);
 
 // Admin
+$app->router->get('/admin', [AdminController::class, 'index'], AuthMiddleware::class);

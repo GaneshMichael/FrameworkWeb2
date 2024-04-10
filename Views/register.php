@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <select class="form-control" required id="role" name="role">
             <option value="Free" <?= $model->role === 'Free' ? 'selected' : '' ?>>Free</option>
             <option value="Premium" <?= $model->role === 'Premium' ? 'selected' : '' ?>>Premium</option>
+            <option value="Beheerder" <?= $model->role === 'Beheerder' ? 'selected' : '' ?>>Beheerder</option>
         </select>
     </div>
     <br>
