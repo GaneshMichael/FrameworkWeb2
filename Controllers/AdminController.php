@@ -133,4 +133,22 @@ class AdminController extends Controller
             }
         }
     }
+
+    public function deleteCard(Request $request, Response $response)
+    {
+        $id = $request->getBody()['id'] ?? null;
+        if (!$id) {
+            throw new Exception("ID is verplicht");
+        }
+
+        $cardModel = new CardModel();
+        $card = $cardModel->findOne(['id' => $id]);
+        if ($card && $card->delete()) {
+            Application::$app->session->setFlash('success', 'Gebruiker succesvol verwijderd.');
+        } else {
+            Application::$app->session->setFlash('error', 'Kon de gebruiker niet verwijderen.');
+        }
+
+        $response->redirect('/admin/cards');
+    }
 }

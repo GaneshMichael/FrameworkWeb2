@@ -4,6 +4,12 @@ $this->title = 'Cards';
 
 <h1 class="text-center"><?= $this->title; ?></h1>
 
+<div class="row p-3">
+    <div class="col-12">
+        <a href="/admin/cards/addCard" class="btn btn-primary">Nieuwe kaart toevoegen</a>
+    </div>
+</div>
+
 <p class="text-center">Bekijk hier alle kaarten</p>
 <div class="row p-3">
 

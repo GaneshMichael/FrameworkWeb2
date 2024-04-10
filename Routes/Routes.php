@@ -34,5 +34,6 @@ $app->router->get('/admin/users/edit', [AdminController::class, 'editUser'], Adm
 $app->router->post('/admin/users/update', [AdminController::class, 'updateUser'], AdminMiddleware::class);
 $app->router->post('/admin/users/delete', [AdminController::class, 'deleteUser'], AdminMiddleware::class);
 $app->router->get('/admin/cards', [AdminController::class, 'cardIndex'], AdminMiddleware::class);
-$app->router->get('/admin/addCard', [AdminController::class, 'addCards'], AdminMiddleware::class);
-$app->router->post('/admin/addCard', [AdminController::class, 'registerCard'], AdminMiddleware::class);
+$app->router->get('/admin/cards/addCard', [AdminController::class, 'addCards'], AdminMiddleware::class);
+$app->router->post('/admin/cards/addCard', [AdminController::class, 'registerCard'], AdminMiddleware::class);
+$app->router->post('/admin/cards/delete', [AdminController::class, 'deleteCard'], AdminMiddleware::class);
