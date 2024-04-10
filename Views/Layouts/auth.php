@@ -52,9 +52,6 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php echo $user->displayName() ?>
-                </a>
             </ul>
 
         </div>

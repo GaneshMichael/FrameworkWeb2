@@ -12,11 +12,14 @@ class CardController extends Controller
     {
         $cards = CardModel::findAllObjects();
         $this->view->title = 'Card database';
-        $this->view->render('cardDatabase', [
-            'cards' => $cards
-        ], 'auth');
+        if (Application::$app->user) {
+            $this->view->render('cardDatabase', [
+                'cards' => $cards], 'auth');
+        } else {
+            $this->view->render('cardDatabase', [
+                'cards' => $cards], 'base');
+        }
     }
-
     public function createCard()
     {
 

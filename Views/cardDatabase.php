@@ -9,9 +9,11 @@ $this->title = 'Card Database';
 
 </div>
 
-<table>
+<table class="table table-striped">
     <thead>
     <tr>
+
+        <th>ID</th>
         <th>Naam</th>
         <th>Beschrijving</th>
         <th>Aanvalskracht</th>
@@ -25,6 +27,7 @@ $this->title = 'Card Database';
     <tbody>
     <?php foreach ($cards as $card) : ?>
         <tr>
+            <td><?= $card->id ?></td>
             <td><?= $card->name ?></td>
             <td><?= $card->description ?></td>
             <td><?= $card->power ?></td>
@@ -33,7 +36,6 @@ $this->title = 'Card Database';
             <td><?= $card->type ?></td>
             <td><?= $card->cardSet ?></td>
             <td><?= $card->marketValue ?></td>
-
         </tr>
     <?php endforeach; ?>
     </tbody>
