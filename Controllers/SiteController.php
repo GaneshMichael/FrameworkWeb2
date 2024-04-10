@@ -3,27 +3,26 @@
 namespace TCG\Controllers;
 use TCG\Core\Application;
 use TCG\Core\Controller;
-use TCG\Core\Request;
 
 class SiteController extends Controller
 {
-    public function contact()
+    public function contact(): void
     {
         $this->view->title = 'Contact us';
         if (Application::$app->user) {
             $this->view->render('contact', [], 'auth');
         } else {
-            $this->view->render('contact', [], 'base');
+            $this->view->render('contact');
         }
     }
 
-    public function premium()
+    public function premium(): void
     {
         $this->view->title = 'Premium';
         if (Application::$app->user) {
             $this->view->render('GetPremium', [], 'auth');
         } else {
-            $this->view->render('GetPremium', [], 'base');
+            $this->view->render('GetPremium');
         }
     }
 

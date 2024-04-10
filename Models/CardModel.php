@@ -13,8 +13,13 @@ class CardModel extends DatabaseModel
     public int $defense = 0;
     public string $rarity = '';
     public string $type = '';
-    public string $set = '';
+    public string $cardSet = '';
     public int $marketValue = 0;
+    public $id;
+    public $created_at;
+    public $updated_at;
+    public $updates_by;
+    public string $scenario = '';
 
 public function rules(): array
     {
@@ -25,22 +30,26 @@ public function rules(): array
             'defense' => [Validation::RULE_REQUIRED],
             'rarity' => [Validation::RULE_REQUIRED],
             'type' => [Validation::RULE_REQUIRED],
-            'set' => [Validation::RULE_REQUIRED],
-            '$marketValue' => [Validation::RULE_REQUIRED],
+            'cardSet' => [Validation::RULE_REQUIRED],
+            'marketValue' => [Validation::RULE_REQUIRED],
         ];
     }
 
-    #[\Override] public static function tableName(): string
+    public function register()
+    {
+        return $this->save();
+    }
+    public static function tableName(): string
     {
         return 'cards';
     }
 
-    #[\Override] public function attributes(): array
+    public function attributes(): array
     {
-        return ['name', 'description', 'power', 'defense', 'rarity', 'type', 'set', 'marketValue'];
+        return ['name', 'description', 'power', 'defense', 'rarity', 'type', 'cardSet', 'marketValue'];
     }
 
-    #[\Override] public function primaryKey(): string
+    public function primaryKey(): string
     {
         return 'id';
     }

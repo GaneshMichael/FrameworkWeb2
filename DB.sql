@@ -9,30 +9,32 @@ CREATE TABLE IF NOT EXISTS 'users' (
     'status' tinyint(4) NOT NULL,
     'created_at' timestamp  DEFAULT current_timestamp,
     'updated_at' timestamp DEFAULT '0000-00-00 00:00:00',
-    'updated_by'  timestamp DEFAULT '0000-00-00 00:00:00'
+    'updated_by'  timestamp DEFAULT '0000-00-00 00:00:00',
 
     PRIMARY KEY(id AUTOINCREMENT)
     );
 
 CREATE TABLE IF NOT EXISTS 'cards' (
-    'id' int(11) NOT NULL,
+    'id' INTEGER NOT NULL,
     'name' varchar(255) NOT NULL,
     'description' text NOT NULL,
     'power' int(11) NOT NULL,
     'defense' int(11) NOT NULL,
     'rarity' varchar(255) NOT NULL,
     'type' varchar(255) NOT NULL,
-    'set' varchar(255) NOT NULL,
+    'cardSet' varchar(255) NOT NULL,
     'marketValue' int(11) NOT NULL,
     'created_at' timestamp DEFAULT current_timestamp,
     'updated_at' timestamp DEFAULT '0000-00-00 00:00:00',
-    'updates_by' timestamp DEFAULT '0000-00-00 00:00:00'
+    'updates_by' timestamp DEFAULT '0000-00-00 00:00:00',
+    PRIMARY KEY(id AUTOINCREMENT)
     );
 
-CREATE TABLE IF NOT EXISTS 'set' (
-    'id' int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS 'cardSet' (
+    'id' INTEGER NOT NULL,
     'name' varchar(255) NOT NULL,
-    'description' text NOT NULL
+    'description' text NOT NULL,
+    PRIMARY KEY(id AUTOINCREMENT)
     );
 
 

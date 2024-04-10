@@ -1,13 +1,11 @@
 <?php
-$this->title = 'Beheerders dashboard';
+$this->title = 'All users';
 ?>
 
 <h1 class="text-center"><?= $this->title; ?></h1>
 
 <div class="row p-3">
-    <div class="col-12">
-        <a href="/register" class="btn btn-primary">Nieuwe gebruiker toevoegen</a>
-    </div>
+
 </div>
 <table class="table">
     <thead>
@@ -24,8 +22,8 @@ $this->title = 'Beheerders dashboard';
             <td><?= $user->id ?></td>
             <td><?= $user->email ?></td>
             <td><?= $user->role ?></td>
-            <td><button class="btn btn-primary"><a style="color:white;" href="<?= '/admin/edit?id=' . $user->id ?>">Wijzigen</a></button>
-                <form method="post" action="/admin/delete">
+            <td><button class="btn btn-primary"><a style="color:white;" href="<?= '/admin/users/edit?id=' . $user->id ?>">Wijzigen</a></button>
+                <form method="post" action="/admin/users/delete">
                     <input type="hidden" name="id" value="<?= $user->id ?>">
                     <button class="btn btn-danger" type="submit" onclick="return confirm('Weet u zeker dat u deze gebruiker wilt verwijderen?')">Verwijderen</button>
                 </form>

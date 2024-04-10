@@ -1,16 +1,40 @@
 <?php
-
-use TCG\Core\Application;
-use TCG\Core\Auth;
-
+$this->title = 'Card Database';
 ?>
 
-<h1>Card database</h1>
+<h1 class="text-center"><?= $this->title; ?></h1>
 
-<h2>Bekijk hier <?php $name = '';
-    if (Application::$app->user) {
-        $name = Application::$app->user->displayName();
-        echo $name;
-    } else {
-        echo 'alle kaarten';
-    } ?> </h2>
+<p class="text-center">Bekijk hier alle kaarten</p>
+<div class="row p-3">
+
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th>Aanvalskracht</th>
+        <th>Verdedigingskracht</th>
+        <th>rarity</th>
+        <th>type</th>
+        <th>Set</th>
+        <th>Marktwaarde</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($cards as $card) : ?>
+        <tr>
+            <td><?= $card->name ?></td>
+            <td><?= $card->description ?></td>
+            <td><?= $card->power ?></td>
+            <td><?= $card->defense ?></td>
+            <td><?= $card->rarity ?></td>
+            <td><?= $card->type ?></td>
+            <td><?= $card->cardSet ?></td>
+            <td><?= $card->marketValue ?></td>
+
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

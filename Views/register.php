@@ -7,7 +7,7 @@ use TCG\core\Application;
 use TCG\Core\Auth;
 use TCG\Models\UserModel;
 
-$session = \TCG\Core\Application::$app->session;
+$session = Application::$app->session;
 $model = new UserModel();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
