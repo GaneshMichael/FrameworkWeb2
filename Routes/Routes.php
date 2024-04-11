@@ -9,6 +9,7 @@ use TCG\Controllers\HomeController;
 use TCG\Controllers\SiteController;
 use TCG\Core\MiddleWares\AdminMiddleware;
 use TCG\Core\MiddleWares\AuthMiddleware;
+use TCG\Core\MiddleWares\PremiumMiddleware;
 
 //    Site
 $app->router->get('/', [HomeController::class, 'index']);
@@ -26,6 +27,9 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 // Decks and Cards
 $app->router->get('/decks', [DeckController::class, 'index']);
 $app->router->get('/cardDatabase', [CardController::class, 'index']);
+$app->router->get('/decks/deck1', [DeckController::class, 'deck1'], PremiumMiddleware::class);
+$app->router->get('/decks/deck2', [DeckController::class, 'deck2'], PremiumMiddleware::class);
+$app->router->get('/decks/deck3', [DeckController::class, 'deck3'], PremiumMiddleware::class);
 
 // Admin
 $app->router->get('/admin', [AdminController::class, 'dashboard'], AdminMiddleware::class);

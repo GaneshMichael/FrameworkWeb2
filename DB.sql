@@ -37,9 +37,22 @@ CREATE TABLE IF NOT EXISTS 'cardSet' (
     PRIMARY KEY(id AUTOINCREMENT)
     );
 
+CREATE TABLE IF NOT EXISTS decks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name varchar(255) NOT NULL,
+    description text,
+    user_id INTEGER NOT NULL,
+    created_at timestamp DEFAULT current_timestamp,
+    updated_at timestamp DEFAULT current_timestamp,
 
--- INSERT INTO `users` (`email`, `password`, `firstName`, `lastName`, `role`, `status`, `created_at`, `updated_by`, `updated_at`) VALUES
--- ('test@test.nl', '$2y$10$0nEMgkhCer0hREevnP37weaQseCWwub2nB6RJb1BDqqQ526jurPsa', 'test', 'test', 'Free', 0, '2024-04-09 23:30:07', 0, '0000-00-00 00:00:00'),
--- ('premium@premium.nl', '$3y$10$0nEMgkhCer0hREevnP37weaQseCWwub2nB6RJb1BDqqQ526jurPsa', 'premium', 'premium', 'Premium', 0, '2024-04-09 22:30:07', 0, '0000-00-00 00:00:00'),
--- ('test2@test.nl', '$4y$10$0nEMgkhCer0hREevnP37weaQseCWwub2nB6RJb1BDqqQ526jurPsa', 'test2', 'test2', 'Free', 0, '2024-04-09 23:35:07', 0, '0000-00-00 00:00:00'),
--- ('admin@admin.nl', '$2y$10$0nEMgkhCer0hREevnP37weaQseCWwub2nB6RJb1BDqqQ526jurPsa', 'admin', 'admin', 'Beheerder', 0, '2024-04-09 23:31:03', 0, '0000-00-00 00:00:00'),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS deck_cards (
+    deck_id INTEGER,
+    card_id INTEGER,
+    quantity INTEGER DEFAULT 1 CHECK (quantity <= 2),
+    FOREIGN KEY (deck_id) REFERENCES decks(id),
+    FOREIGN KEY (card_id) REFERENCES cards(id),
+    PRIMARY KEY (deck_id, card_id)
+);

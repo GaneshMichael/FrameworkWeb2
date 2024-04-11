@@ -7,12 +7,11 @@ use TCG\Core\Exception\ForbiddenException;
 use TCG\Core\Request;
 use TCG\Core\Response;
 
-class AdminMiddleware extends BaseMiddleware
+class PremiumMiddleware extends BaseMiddleware
 {
     public function handle(Request $request, Response $response)
     {
-        if (!Auth::isAdmin()) {
-            // Gebruiker is niet ingelogd, doorverwijzen naar de inlogpagina
+        if (Auth::isGuest() || Auth::isFree()) {
             throw new ForbiddenException();
         }
 
