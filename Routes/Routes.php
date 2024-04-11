@@ -27,9 +27,18 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 // Decks and Cards
 $app->router->get('/decks', [DeckController::class, 'index']);
 $app->router->get('/cardDatabase', [CardController::class, 'index']);
-$app->router->get('/decks/deck1', [DeckController::class, 'deck1'], PremiumMiddleware::class);
-$app->router->get('/decks/deck2', [DeckController::class, 'deck2'], PremiumMiddleware::class);
-$app->router->get('/decks/deck3', [DeckController::class, 'deck3'], PremiumMiddleware::class);
+$app->router->get('/decks/newDeck', [DeckController::class, 'newDeck'], PremiumMiddleware::class);
+
+// Aanmaken van een deck
+$app->router->post('/decks/newDeck', [DeckController::class, 'create'], AuthMiddleware::class, PremiumMiddleware::class);
+
+// Bewerken van een deck
+$app->router->get('/decks/{id}/edit', [DeckController::class, 'edit'], AuthMiddleware::class, PremiumMiddleware::class);
+$app->router->post('/decks/{id}/update', [DeckController::class, 'update'], AuthMiddleware::class, PremiumMiddleware::class);
+
+// Verwijderen van een deck
+$app->router->post('/decks/{id}/delete', [DeckController::class, 'delete'], AuthMiddleware::class, PremiumMiddleware::class);
+
 
 // Admin
 $app->router->get('/admin', [AdminController::class, 'dashboard'], AdminMiddleware::class);

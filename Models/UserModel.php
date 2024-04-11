@@ -80,7 +80,6 @@ class UserModel extends DatabaseModel
         return true;
     }
 
-
     public function register(): bool
     {
         if ($this->validateConfirmPassword()) {

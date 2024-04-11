@@ -18,9 +18,9 @@
                         <p class="card-text">Marktwaarde: <?= $card->marketValue ?></p>
                         <?php $selected_count = isset($_POST['selected_cards'][$card->id]) ? count($_POST['selected_cards'][$card->id]) : 0; ?>
                         <div>
-                            <button type="button" class="btn btn-sm btn-primary" onclick="decreaseQuantity(<?= $card->id ?>)">-</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="changeQuantity(<?= $card->id ?>, -1)" <?= $selected_count <= 0 ? 'disabled' : '' ?>>-</button>
                             <span id="quantity<?= $card->id ?>"><?= $selected_count ?></span>
-                            <button type="button" class="btn btn-sm btn-primary" onclick="increaseQuantity(<?= $card->id ?>)">+</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="changeQuantity(<?= $card->id ?>, 1)" <?= $selected_count >= 2 ? 'disabled' : '' ?>>+</button>
                             keer geselecteerd
                             <input type="hidden" name="selected_cards[<?= $card->id ?>]" id="selectedCards<?= $card->id ?>" value="<?= $selected_count ?>">
                         </div>
@@ -34,19 +34,15 @@
 </form>
 
 <script>
-    function increaseQuantity(cardId) {
+    function changeQuantity(cardId, change) {
         var quantityElement = document.getElementById('quantity' + cardId);
         var currentQuantity = parseInt(quantityElement.textContent);
-        quantityElement.textContent = currentQuantity + 1;
-        document.getElementById('selectedCards' + cardId).value = currentQuantity + 1;
-    }
-
-    function decreaseQuantity(cardId) {
-        var quantityElement = document.getElementById('quantity' + cardId);
-        var currentQuantity = parseInt(quantityElement.textContent);
-        if (currentQuantity > 0) {
-            quantityElement.textContent = currentQuantity - 1;
-            document.getElementById('selectedCards' + cardId).value = currentQuantity - 1;
+        var newQuantity = currentQuantity + change;
+        if (newQuantity >= 0 && newQuantity <= 2) {
+            quantityElement.textContent = newQuantity;
+            document.getElementById('selectedCards' + cardId).value = newQuantity;
+            var minusButton = document.querySelector('#quantity' + cardId).previousElementSibling;
+            minusButton.disabled = newQuantity <= 0;
         }
     }
 </script>
