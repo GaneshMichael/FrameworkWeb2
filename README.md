@@ -29,13 +29,18 @@ Er zijn drie soorten accounts:
 - Beheerder
 
 ## Installatie <a name="installatie"></a>
+
 ### Composer install/update
 - Zorg ervoor dat je composer install gebruikt om de benodigde vendor map aan te maken
 - Composer install of  Composer update
-### Runnen
-- Gebruik php -S localhost:8080 in de terminal in de root
 
-## Gebruik <a name="gebruik"></a>
+### Runnen van de applicatie
+- Gebruik php -S localhost:8080 in de terminal in de root
+```bash
+- php -S localhost:8080
+```
+
+## Test accounts <a name="gebruik"></a>
 | Email               | Wachtwoord   | Role         |
 |---------------------|--------------|--------------|
 | test@test.nl        | testtest     | Free user    |
