@@ -13,11 +13,12 @@ class DeckController extends Controller
 {
     public function index()
     {
+        $decks = DeckModel::findAllObjects();
         $this->view->title = 'Decks';
         if (Application::$app->user) {
-            $this->view->render('decks', [], 'auth');
+            $this->view->render('decks', ['decks' => $decks], 'auth');
         } else {
-            $this->view->render('decks', [], 'base');
+            $this->view->render('decks', ['decks' => $decks], 'base');
         }
     }
 
@@ -27,14 +28,13 @@ class DeckController extends Controller
         $this->view->title = 'Nieuw Deck';
         $this->view->render('Premium/newDeck', ['cards' => $cards], 'auth');
     }
-
     public function create(Request $request, Response $response)
     {
         $deck = new DeckModel();
         $deck->loadData($request->getBody());
+        $deck->user_id = Application::$app->user->id;
 
-        $deck->cards = $_POST['cards'] ?? [];
-        $deck->selected_cards = $_POST['selected_cards'] ?? [];
+        $deck->cards = implode(',', $_POST['cards'] ?? []);
 
         $isValidationSuccessful = $deck->validate();
 
@@ -45,5 +45,4 @@ class DeckController extends Controller
             Application::$app->session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
         }
     }
-
 }

@@ -8,9 +8,8 @@ use TCG\Utils\Validation;
 class DeckModel extends DatabaseModel
 {
     public string $name;
-    public array $cards = [];
-    public array $selected_cards = [];
-
+    public string $cards;
+    public int $user_id;
 
     public static function tableName(): string
     {
@@ -24,7 +23,7 @@ class DeckModel extends DatabaseModel
 
     public function attributes(): array
     {
-        return ['name', 'postData', 'cards', 'selected_cards'];
+        return ['name', 'cards', 'user_id'];
     }
 
     public function primaryKey(): string
@@ -36,7 +35,31 @@ class DeckModel extends DatabaseModel
     {
         return [
             'name' => [Validation::RULE_REQUIRED],
+            'cards' => [Validation::RULE_REQUIRED]
             // Add validation rules for other attributes if needed
         ];
     }
+
+
+    public function getCardNames(): array
+    {
+        $cardIds = explode(',', $this->cards);
+        $cardNames = [];
+
+        foreach ($cardIds as $cardId) {
+            $card = CardModel::findOne(['id' => $cardId]);
+            if ($card) {
+                $cardNames[] = $card->name;
+            }
+        }
+
+        return $cardNames;
+    }
+    public function getUserName(): string
+    {
+        $user = UserModel::findOne(['id' => $this->user_id]);
+        return $user ? $user->displayName() : '';
+    }
+
+
 }

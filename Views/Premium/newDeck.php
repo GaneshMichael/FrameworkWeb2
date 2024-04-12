@@ -15,7 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
     }
 }
+
+$user_id = Application::$app->user->id;
 ?>
+
 
 <h1 class="text-center">Stel je deck samen</h1>
 
@@ -30,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="row p-3">
         <?php foreach ($cards as $card) : ?>
-            <input type="hidden" name="cards[]" value="<?= $card->id ?>">
             <div class="col-md-3">
                 <div class="card mb-4">
                     <div class="card-body">
@@ -42,14 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p class="card-text">Type: <?= $card->type ?></p>
                         <p class="card-text">Set: <?= $card->cardSet ?></p>
                         <p class="card-text">Marktwaarde: <?= $card->marketValue ?></p>
-                        <?php $selected_count = isset($_POST['selected_cards'][$card->id]) ? $_POST['selected_cards'][$card->id] : 0; ?>
-                        <div>
-                            <button type="button" class="btn btn-sm btn-primary" onclick="changeQuantity(<?= $card->id ?>, -1)" <?= $selected_count <= 0 ? 'disabled' : '' ?>>-</button>
-                            <span id="quantity<?= $card->id ?>"><?= $selected_count ?></span>
-                            <button type="button" class="btn btn-sm btn-primary" onclick="changeQuantity(<?= $card->id ?>, 1)" <?= $selected_count >= 2 ? 'disabled' : '' ?>>+</button>
-                            keer geselecteerd
-                            <input type="hidden" name="selected_cards[<?= $card->id ?>]" id="selectedCards<?= $card->id ?>" value="<?= $selected_count ?>">
-                        </div>
+                        <input type="checkbox" name="cards[]" value="<?= $card->id ?>"> Voeg toe aan deck
+                        <br>
+                        <input type="checkbox" name="cards[]" value="<?= $card->id ?>"> voeg toe aan deck
+
                     </div>
                 </div>
             </div>
@@ -60,15 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 
 <script>
-    function changeQuantity(cardId, change) {
-        var quantityElement = document.getElementById('quantity' + cardId);
-        var currentQuantity = parseInt(quantityElement.textContent);
-        var newQuantity = currentQuantity + change;
-        if (newQuantity >= 0 && newQuantity <= 2) {
-            quantityElement.textContent = newQuantity;
-            document.getElementById('selectedCards' + cardId).value = newQuantity;
-            var minusButton = document.querySelector('#quantity' + cardId).previousElementSibling;
-            minusButton.disabled = newQuantity <= 0;
-        }
+    function changeQuantity(cardId, isChecked) {
+        var cardInput = document.querySelector('input[name="cards[]"][value="' + cardId + '"]');
+        cardInput.checked = isChecked;
     }
 </script>

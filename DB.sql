@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS 'cardSet' (
 CREATE TABLE IF NOT EXISTS decks (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name varchar(255) NOT NULL,
-    description text,
+    cards varchar(255) NOT NULL,
     user_id INTEGER NOT NULL,
     created_at timestamp DEFAULT current_timestamp,
     updated_at timestamp DEFAULT current_timestamp,
@@ -48,11 +48,11 @@ CREATE TABLE IF NOT EXISTS decks (
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
-CREATE TABLE IF NOT EXISTS deck_cards (
-    deck_id INTEGER,
-    card_id INTEGER,
-    quantity INTEGER DEFAULT 1 CHECK (quantity <= 2),
-    FOREIGN KEY (deck_id) REFERENCES decks(id),
-    FOREIGN KEY (card_id) REFERENCES cards(id),
-    PRIMARY KEY (deck_id, card_id)
-);
+-- CREATE TABLE IF NOT EXISTS deck_cards (
+--     deck_id INTEGER,
+--     card_id INTEGER,
+--     quantity INTEGER DEFAULT 1 CHECK (quantity <= 2),
+--     FOREIGN KEY (deck_id) REFERENCES decks(id),
+--     FOREIGN KEY (card_id) REFERENCES cards(id),
+--     PRIMARY KEY (deck_id, card_id)
+-- );
