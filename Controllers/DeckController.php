@@ -11,6 +11,7 @@ use TCG\Models\DeckModel;
 
 class DeckController extends Controller
 {
+    // Renders the decks page.
     public function index()
     {
         $decks = DeckModel::findAllObjects();
@@ -22,12 +23,14 @@ class DeckController extends Controller
         }
     }
 
+    // Renders the new deck creation page.
     public function newDeck()
     {
         $cards = CardModel::findAllObjects();
         $this->view->title = 'Nieuw Deck';
         $this->view->render('Premium/newDeck', ['cards' => $cards], 'auth');
     }
+    // Handles the creation of a new deck.
     public function create(Request $request, Response $response)
     {
         $deck = new DeckModel();

@@ -11,14 +11,15 @@ class AuthMiddleware extends BaseMiddleware
 
     public function handle(Request $request, Response $response)
     {
-        // TODO: Implement handle() method.
+        // Handle an incoming request.
+
         if (Auth::isGuest()) {
-            // Gebruiker is niet ingelogd, doorverwijzen naar de inlogpagina
+            // User is not logged in, redirect to the login page
             $response->redirect('/login');
             return $response;
         }
 
-        // Voer de volgende middleware of controller actie uit
+        // Proceed to the next middleware or controller action
         return null;
     }
 }

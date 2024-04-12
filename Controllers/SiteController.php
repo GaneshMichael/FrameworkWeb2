@@ -6,6 +6,7 @@ use TCG\Core\Controller;
 
 class SiteController extends Controller
 {
+    // Renders the home page.
     public function home()
     {
         $this->view->title = 'Home';
@@ -15,6 +16,7 @@ class SiteController extends Controller
             $this->view->render('home', [], 'base');
         }
     }
+    // Renders the contact page.
     public function contact(): void
     {
         $this->view->title = 'Contact us';
@@ -25,6 +27,7 @@ class SiteController extends Controller
         }
     }
 
+    //  Renders the premium subscription page.
     public function premium(): void
     {
         $this->view->title = 'Premium';

@@ -4,6 +4,7 @@ namespace TCG\Core;
 
 class Request
 {
+    // Get the path of the request.
     public function getPath()
     {
         $path = $_SERVER['REQUEST_URI'] ?? '/';
@@ -14,21 +15,25 @@ class Request
         return substr($path, 0, $position);
     }
 
+    // Get the request method.
     public function method(): string
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
+    // Check if the request method is GET.
     public function isGet(): bool
     {
         return $this->method() === 'get';
     }
 
+    // Check if the request method is POST.
     public function isPost(): bool
     {
         return $this->method() === 'post';
     }
 
+    // Get the request body.
     public function getBody()
     {
         $body = [];
@@ -46,15 +51,19 @@ class Request
         return $body;
     }
 
+    // Get the query parameters of the request.
+    public function getQueryParams(): array
+    {
+        return $_GET;
+    }
+
+    // Get the request URI.
     public function getUri()
     {
         return $_SERVER['REQUEST_URI'];
     }
 
-    public function getQueryParams(): array
-    {
-        return $_GET;
-    }
+
 
 
 }

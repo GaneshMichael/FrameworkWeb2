@@ -14,6 +14,7 @@ class NotFoundException extends \Exception
         parent::__construct($message, $code, $previous);
     }
 
+    // Convert the exception to a string representation.
     public function __toString()
     {
         return __CLASS__ . ": [{$this->code}]: {$this->message}";

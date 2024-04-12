@@ -8,6 +8,7 @@ use TCG\Models\CardModel;
 
 class CardController extends Controller
 {
+    // Renders the card database page.
     public function index()
     {
         $cards = CardModel::findAllObjects();
@@ -19,9 +20,5 @@ class CardController extends Controller
             $this->view->render('cardDatabase', [
                 'cards' => $cards], 'base');
         }
-    }
-    public function createCard()
-    {
-
     }
 }

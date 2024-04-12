@@ -5,6 +5,7 @@ namespace TCG\Core;
 class Router {
     protected array $routes = [];
 
+    // Define a route for GET requests.
     public function get($path, $callback, $middleware = null): void
     {
         $this->routes['get'][$path] = [
@@ -12,6 +13,8 @@ class Router {
             'middleware' => $middleware,
         ];
     }
+
+    // Define a route for POST requests.
     public function post($path, $callback, $middleware = null): void
     {
         $this->routes['post'][$path] = [
@@ -20,6 +23,7 @@ class Router {
         ];
     }
 
+    // Resolve the incoming request to the appropriate route.
     public function resolve(Request $request): void
     {
         $path = $request->getPath();
@@ -65,6 +69,7 @@ class Router {
         }
     }
 
+    // Get middlewares for the route.
     public function getMiddlewares($middleware): array
     {
         if (is_array($middleware)) {
@@ -76,6 +81,7 @@ class Router {
         return [];
     }
 
+    // Resolve middlewares to instances.
     private function resolveMiddlewares(array $middlewares): array
     {
         $resolvedMiddlewares = [];
@@ -87,6 +93,7 @@ class Router {
         return $resolvedMiddlewares;
     }
 
+    // Execute the middlewares.
     public function executeMiddlewares(array $middlewares, Request $request, Response $response): ?Response
     {
         foreach ($middlewares as $middleware) {

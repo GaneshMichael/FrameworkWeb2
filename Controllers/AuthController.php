@@ -23,6 +23,7 @@ class AuthController extends Controller
         $this->registerMiddleware(new AuthMiddleware());
     }
 
+    // Renders the login page and handles user login.
     public function login(Request $request): View
     {
         $loginModel = new LoginModel();
@@ -48,6 +49,7 @@ class AuthController extends Controller
         return $this->view;
     }
 
+    // Handles user registration.
     public function register(Request $request, Response $response)
     {
         $user = new UserModel();
@@ -75,6 +77,7 @@ class AuthController extends Controller
         }
     }
 
+    // Logs out the user.
     public function logout()
     {
         Application::$app->user = null;

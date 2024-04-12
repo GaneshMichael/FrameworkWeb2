@@ -22,11 +22,7 @@ class Database implements DatabaseConnection
         }
     }
 
-    public function getPdo(): PDO
-    {
-        return $this->pdo;
-    }
-
+    // Create a singleton instance of the Database class.
     public static function create(): DatabaseConnection
     {
         if (self::$instance === null) {
@@ -35,4 +31,12 @@ class Database implements DatabaseConnection
 
         return self::$instance;
     }
+
+    // Get the PDO object for the database connection.
+    public function getPdo(): PDO
+    {
+        return $this->pdo;
+    }
+
+
 }

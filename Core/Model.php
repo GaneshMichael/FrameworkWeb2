@@ -8,17 +8,19 @@ use TCG\Utils\Validation;
 abstract class Model
 {
     abstract public function rules(): array;
+    public array $errors = [];
 
+    // Define labels for the model attributes.
     public function labels(): array
     {
         return [];
     }
 
-    public array $errors = [];
-
     /**
      * @throws Exception
      */
+
+    // Validate the model attributes based on the defined rules.
     public function validate(): bool
     {
         $this->errors = [];
@@ -48,6 +50,7 @@ abstract class Model
         return empty($this->errors);
     }
 
+    // Add an error message for the specified attribute.
     public function addError(string $attribute, string $message): void
     {
         $this->errors[$attribute][] = $message;

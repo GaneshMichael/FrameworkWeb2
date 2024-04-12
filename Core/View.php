@@ -7,10 +7,13 @@ class View
     protected string $layout = 'base';
     public string $title = '';
 
+    // Render a view with optional layout.
     public function render($view, $data = [], $layout = 'base'): void
     {
         $this->layout = $layout;
+
         extract($data);
+
         ob_start();
         include_once "Views/$view.php";
         $content = ob_get_clean();

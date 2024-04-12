@@ -12,11 +12,11 @@ class AdminMiddleware extends BaseMiddleware
     public function handle(Request $request, Response $response)
     {
         if (!Auth::isAdmin()) {
-            // Gebruiker is niet ingelogd, doorverwijzen naar de inlogpagina
+            // User is not an admin, throw a ForbiddenException
             throw new ForbiddenException();
         }
 
-        // Voer de volgende middleware of controller actie uit
+        // Proceed to the next middleware or controller action
         return null;
     }
 }

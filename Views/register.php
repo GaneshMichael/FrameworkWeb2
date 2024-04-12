@@ -1,10 +1,9 @@
 <?php
 
-/** @var $model \TCG\models\UserModel
+/** @var $model \TCG\Models\UserModel
  */
 
 use TCG\core\Application;
-use TCG\Core\Auth;
 use TCG\Models\UserModel;
 
 $session = Application::$app->session;
@@ -15,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($model->validate() && $model->register()) {
         $session->setFlash('success', 'Account created successfully.');
-        return $this->redirect('/dashboard');
+        return $this->redirect('/Dashboard');
     } else {
         $session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
     }

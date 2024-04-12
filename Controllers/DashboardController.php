@@ -17,6 +17,7 @@ class DashboardController extends Controller
         $this->registerMiddleware(new AuthMiddleware());
     }
 
+    // Renders the dashboard page.
     public function index()
     {
         $this->view->title = 'Dashboard';

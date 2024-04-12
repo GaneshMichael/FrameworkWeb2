@@ -16,7 +16,10 @@ class Application
 
     public function __construct(Router $router, Request $request, Response $response, Session $session, UserModel $user = null)
     {
+        // Set the application instance
         self::$app = $this;
+
+        // Initialize components
         $this->router = $router;
         $this->request = $request;
         $this->response = $response;
@@ -24,6 +27,7 @@ class Application
         $this->user = $user;
     }
 
+    // Run the application.
     public function run()
     {
         try {

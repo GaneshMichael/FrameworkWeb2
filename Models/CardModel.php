@@ -21,7 +21,8 @@ class CardModel extends DatabaseModel
     public $updates_by;
     public string $scenario = '';
 
-public function rules(): array
+    // Define validation rules for card attributes.
+    public function rules(): array
     {
         return [
             'name' => [Validation::RULE_REQUIRED],
@@ -35,15 +36,19 @@ public function rules(): array
         ];
     }
 
+    // Save the card data to the database.
     public function register()
     {
         return $this->save();
     }
+
+    // Get the table name for the cards.
     public static function tableName(): string
     {
         return 'cards';
     }
 
+    //  Get the list of attributes to be saved in the database.
     public function attributes(): array
     {
         return ['name', 'description', 'power', 'defense', 'rarity', 'type', 'cardSet', 'marketValue'];

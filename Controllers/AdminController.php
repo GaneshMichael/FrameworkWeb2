@@ -14,12 +14,14 @@ use TCG\Core\Controller;
 class AdminController extends Controller
 {
 
+    // Renders the admin dashboard
     public function dashboard()
     {
         $this->view->title = 'beheerderspagina';
         $this->view->render('Admin/AdminDashboard', [], 'auth');
     }
 
+    // Renders admin user index
     public function userIndex()
     {
         $users = UserModel::findAllObjects();
@@ -29,6 +31,7 @@ class AdminController extends Controller
         ], 'auth');
     }
 
+    // Renders the user editing page
     public function editUser(Request $request, Response $response)
     {
     $id = $request->getQueryParams()['id'];
@@ -50,6 +53,7 @@ class AdminController extends Controller
     ], 'auth');
     }
 
+    // Updates the user information
     public function updateUser(Request $request, Response $response)
     {
         $id = $request->getQueryParams()['id'] ?? null;
@@ -84,6 +88,7 @@ class AdminController extends Controller
         }
     }
 
+    // Deletes a user
     public function deleteUser(Request $request, Response $response)
     {
         $id = $request->getBody()['id'] ?? null;
@@ -103,6 +108,7 @@ class AdminController extends Controller
     }
 
 
+    // Renders the page for card management
     public function cardIndex()
     {
         $cards = CardModel::findAllObjects();
@@ -112,12 +118,14 @@ class AdminController extends Controller
         ], 'auth');
     }
 
+    // Renders the page for adding a new card
     public function addCards(Request $request, Response $response)
     {
         $this->view->title = 'Kaart toevoegen';
         $this->view->render('Admin/addCard', [], 'auth');
     }
 
+    // Registers a new card
     public function registerCard(Request $request, Response $response)
     {
         $card = new CardModel();
@@ -135,6 +143,7 @@ class AdminController extends Controller
         }
     }
 
+    // Delete a card
     public function deleteCard(Request $request, Response $response)
     {
         $id = $request->getBody()['id'] ?? null;

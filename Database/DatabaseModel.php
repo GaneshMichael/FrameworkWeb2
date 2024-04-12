@@ -7,15 +7,22 @@ use PDO;
 
 abstract class DatabaseModel extends Model
 {
+    // Get the table name associated with the model.
     abstract public static function tableName(): string;
 
+    // Get the attributes that are mass assignable.
     abstract public function attributes(): array;
 
+    // Get the primary key for the model.
+    abstract public function primaryKey(): string;
+
+    // Get the PDO object for the database connection
     protected static function getDb(): PDO
     {
         return DbConnect::getConnection()->getPdo();
     }
 
+    // Retrieve all objects from the database table.
     public static function findAllObjects(): array
     {
         $tableName = static::tableName();
@@ -30,6 +37,7 @@ abstract class DatabaseModel extends Model
         return $objects;
     }
 
+    // Retrieve a single object from the database based on the given condition
     public static function findOne($where)
     {
         $tableName = static::tableName();
@@ -49,6 +57,7 @@ abstract class DatabaseModel extends Model
         return ($result !== false) ? $result : null;
     }
 
+    // Save the current model instance to the database.
     public function save(): bool
     {
         $tableName = static::tableName();
@@ -66,6 +75,17 @@ abstract class DatabaseModel extends Model
         return $statement->execute();
     }
 
+    // Delete the current model instance from the database.
+    public function delete(): bool
+    {
+        $tableName = static::tableName();
+        $primaryKey = $this->primaryKey();
+        $statement = self::getDb()->prepare("DELETE FROM $tableName WHERE $primaryKey = :id");
+        $statement->bindValue(":id", $this->{$primaryKey});
+        return $statement->execute();
+    }
+
+    // Update the current model instance in the database.
     public function update(): bool
     {
         $tableName = static::tableName();
@@ -91,17 +111,7 @@ abstract class DatabaseModel extends Model
         return $statement->execute();
     }
 
-    abstract public function primaryKey(): string;
-
-    public function delete(): bool
-    {
-        $tableName = static::tableName();
-        $primaryKey = $this->primaryKey();
-        $statement = self::getDb()->prepare("DELETE FROM $tableName WHERE $primaryKey = :id");
-        $statement->bindValue(":id", $this->{$primaryKey});
-        return $statement->execute();
-    }
-
+    // Load data from an array into the model instance.
     public function loadData($data): static
     {
         foreach ($data as $key => $value) {
