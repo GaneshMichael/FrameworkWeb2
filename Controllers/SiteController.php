@@ -6,6 +6,15 @@ use TCG\Core\Controller;
 
 class SiteController extends Controller
 {
+    public function home()
+    {
+        $this->view->title = 'Home';
+        if (Application::$app->user) {
+            $this->view->render('home', [], 'auth');
+        } else {
+            $this->view->render('home', [], 'base');
+        }
+    }
     public function contact(): void
     {
         $this->view->title = 'Contact us';

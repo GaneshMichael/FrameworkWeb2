@@ -13,7 +13,7 @@ use TCG\Core\Controller;
 
 class AdminController extends Controller
 {
-    
+
     public function dashboard()
     {
         $this->view->title = 'beheerderspagina';

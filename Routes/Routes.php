@@ -12,7 +12,7 @@ use TCG\Core\MiddleWares\AuthMiddleware;
 use TCG\Core\MiddleWares\PremiumMiddleware;
 
 //    Site
-$app->router->get('/', [HomeController::class, 'index']);
+$app->router->get('/', [SiteController::class, 'home']);
 $app->router->get('/dashboard', [DashboardController::class, 'index'], AuthMiddleware::class);
 $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->get('/premium', [SiteController::class, 'premium']);
