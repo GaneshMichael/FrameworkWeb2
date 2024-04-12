@@ -29,12 +29,15 @@ Er zijn drie soorten accounts:
 - Beheerder
 
 ## Installatie <a name="installatie"></a>
-1. Clone de repository
-2. tzt
+### Composer install/update
+- Zorg ervoor dat je composer install gebruikt om de benodigde vendor map aan te maken
+- Composer install of  Composer update
+### Runnen
+- Gebruik php -S localhost:8080 in de terminal in de root
 
 ## Gebruik <a name="gebruik"></a>
-| Userid | Email                    | Role         |
-|--------|--------------------------|--------------|
-| 1      | m.a.s.ganesh@st.hanze.nl | Free user    |
-|        |                          | Premium user |
-|        |                          | Beheerder    |
+| Email               | Wachtwoord   | Role         |
+|---------------------|--------------|--------------|
+| test@test.nl        | testtest     | Free user    |
+| premium@premium.com | premium!     | Premium user |
+| beheer@beheer.nl    | beheerbeheer | Beheerder    |
