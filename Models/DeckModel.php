@@ -11,26 +11,31 @@ class DeckModel extends DatabaseModel
     public string $cards;
     public int $user_id;
 
+    // Get the table name for the decks.
     public static function tableName(): string
     {
         return 'decks';
     }
 
+    // Save the deck data to the database.
     public function register(): bool
     {
         return $this->save();
     }
 
+    // Get the list of attributes to be saved in the database.
     public function attributes(): array
     {
         return ['name', 'cards', 'user_id'];
     }
 
+    // Get the primary key for the decks table.
     public function primaryKey(): string
     {
         return 'id';
     }
 
+    // Define validation rules for deck attributes.
     public function rules(): array
     {
         return [

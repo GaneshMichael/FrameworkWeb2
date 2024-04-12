@@ -13,35 +13,40 @@ class Validation
     public const RULE_MATCH = 'match';
     public const RULE_UNIQUE = 'unique';
 
+    //  Checks if the value is not empty.
     public static function required($value)
     {
         return !empty($value);
     }
 
+    // Validates if the value is a valid email address
     public static function email($value)
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
 
+    // Validates if the value meets a minimum length requirement.
     public static function min($value, $params)
     {
         $minLength = $params['min'] ?? 0;
         return strlen($value) >= $minLength;
     }
 
+    // Validates if the value meets a maximum length requirement.
     public static function max($value, $params)
     {
         $maxValue = $params['max'] ?? PHP_INT_MAX;
         return $value <= $maxValue;
     }
 
-
+    // Validates if the value matches another attribute's value.
     public static function match($value, $params)
     {
         $attribute = $params['match'] ?? '';
         return $value === $params[$attribute];
     }
 
+    // Validates if the value is unique in the specified database table and attribute.
     public static function unique($value, $params)
     {
         $db = DbConnect::getConnection();
@@ -55,8 +60,7 @@ class Validation
         return !$record;
     }
 
-
-
+    // Returns the corresponding error message for a validation rule.
     public static function getErrorMessage($rule)
     {
         $messages = [

@@ -11,6 +11,7 @@ class LoginModel extends DatabaseModel
     public string $email = '';
     public string $password = '';
 
+    // Define validation rules for deck attributes.
     public function rules(): array
     {
         return [
@@ -27,10 +28,12 @@ class LoginModel extends DatabaseModel
         ];
     }
 
+    // Get the table name for the decks.
     public static function tableName(): string
     {
         return 'users';
     }
+
 
     public function attributes(): array
     {
@@ -42,6 +45,7 @@ class LoginModel extends DatabaseModel
         return 'id';
     }
 
+    // Validate user login credentials and perform login.
     public function login(): bool
     {
         $user = UserModel::findOne(['email' => $this->email]);
