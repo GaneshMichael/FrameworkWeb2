@@ -34,7 +34,7 @@ class AuthController extends Controller
 
             if ($loginModel->validate() && $loginModel->login()) {
                 Application::$app->session->setFlash('success', 'Succesvol ingelogd.');
-                return $this->redirect('/dashboard');
+                return $this->redirect('/home');
             } else {
                 $errorMessage = 'Ongeldige inloggegevens. Probeer het opnieuw.';
             }
@@ -61,7 +61,7 @@ class AuthController extends Controller
 
             if ($isValidationSuccessful && $user->register()) {
                 Application::$app->session->setFlash('success', 'Account succesvol aangemaakt.');
-                return $response->redirect('/dashboard');
+                return $response->redirect('/Login');
             } else {
                 Application::$app->session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
             }

@@ -50,3 +50,6 @@ $app->router->get('/admin/cards', [AdminController::class, 'cardIndex'], AdminMi
 $app->router->get('/admin/cards/addCard', [AdminController::class, 'addCards'], AdminMiddleware::class);
 $app->router->post('/admin/cards/addCard', [AdminController::class, 'registerCard'], AdminMiddleware::class);
 $app->router->post('/admin/cards/delete', [AdminController::class, 'deleteCard'], AdminMiddleware::class);
+$app->router->get('/admin/cards/edit', [AdminController::class, 'editCard'], AdminMiddleware::class);
+$app->router->post('/admin/cards/update', [AdminController::class, 'updateCard'], AdminMiddleware::class);
+
