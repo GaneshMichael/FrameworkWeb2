@@ -61,7 +61,7 @@ class AuthController extends Controller
 
             if ($isValidationSuccessful && $user->register()) {
                 Application::$app->session->setFlash('success', 'Account succesvol aangemaakt.');
-                return $response->redirect('/Login');
+                return $response->redirect('/dashboard');
             } else {
                 Application::$app->session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
             }
