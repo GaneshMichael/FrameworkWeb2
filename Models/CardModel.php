@@ -17,6 +17,7 @@ class CardModel extends DatabaseModel
     public string $cardSet = '';
     public int $marketValue = 0;
     public $id;
+    public $created_at;
     public $updated_at;
     public $updates_by;
     public string $scenario = '';
@@ -38,6 +39,7 @@ class CardModel extends DatabaseModel
 
     public function update(): bool
     {
+        $this->created_at = date('Y-m-d H:i:s');
         $this->updates_by = Application::$app->user->id;
         $this->updated_at = date('Y-m-d H:i:s');
         return parent::update();
