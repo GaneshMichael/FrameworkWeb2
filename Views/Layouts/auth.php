@@ -33,7 +33,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                     <a class="nav-link" href="/decks">Decks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cardDatabase">Card Database</a>
+                    <a class="nav-link" href="/cardDatabase">Kaarten</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="/contact">Contact</a>

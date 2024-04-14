@@ -85,4 +85,5 @@ class DeckModel extends DatabaseModel
         $user = UserModel::findOne(['id' => $this->user_id]);
         return $user ? $user->displayName() : '';
     }
+    
 }

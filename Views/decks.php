@@ -23,7 +23,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 
 <h2>Alle decks</h2>
 
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th>Naam</th>

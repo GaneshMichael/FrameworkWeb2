@@ -15,6 +15,7 @@ class DeckController extends Controller
     public function index()
     {
         $decks = DeckModel::findAllObjects();
+
         $this->view->title = 'Decks';
         if (Application::$app->user) {
             $this->view->render('decks', ['decks' => $decks], 'auth');

@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Card Database';
+$this->title = 'Speelkaarten Database';
 ?>
 
 <h1 class="text-center"><?= $this->title; ?></h1>

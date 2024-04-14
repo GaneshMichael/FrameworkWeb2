@@ -21,7 +21,10 @@ class CardController extends Controller
 
         // Render de weergave met de gefilterde kaarten
         $this->view->title = 'Card database';
-        $this->view->render('cardDatabase', ['cards' => $cards]);
+        if (Application::$app->user) {
+            $this->view->render('cardDatabase', ['cards' => $cards], 'auth');
+        } else {
+            $this->view->render('cardDatabase', ['cards' => $cards], 'base');
+        }
     }
-
 }
