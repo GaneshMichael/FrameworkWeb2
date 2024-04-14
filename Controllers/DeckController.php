@@ -30,6 +30,7 @@ class DeckController extends Controller
         $this->view->title = 'Nieuw Deck';
         $this->view->render('Premium/newDeck', ['cards' => $cards], 'auth');
     }
+
     // Handles the creation of a new deck.
     public function create(Request $request, Response $response)
     {
