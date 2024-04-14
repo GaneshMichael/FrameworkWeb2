@@ -1,5 +1,5 @@
 <?php
-$this->title = 'All users';
+$this->title = 'Alle gebruikers';
 ?>
 
 <h1 class="text-center"><?= $this->title; ?></h1>

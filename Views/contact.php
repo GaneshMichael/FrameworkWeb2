@@ -1,18 +1,18 @@
 <h1>Contact</h1>
-<p>Send us a message!</p>
+<p>Stuur ons een bericht!</p>
 <form action="" method="post">
     <div class="form-group">
-        <label ">Subject</label>
-        <input name="Subject" type="subject" class="form-control">
+        <label ">Onderwerp</label>
+        <input name="Onderwerp" type="Onderwerp" class="form-control">
     </div>
     <div class="form-group">
-        <label ">Email address</label>
+        <label ">Email adres</label>
         <input name="Email" type="Email" class="form-control">
     </div>
     <div class="form-group">
-        <label ">Message</label>
+        <label ">Bericht</label>
         <textarea name="Message" class="form-control"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary"> Submit</button>
+    <button type="submit" class="btn btn-primary"> Versturen</button>
 </form>

@@ -22,15 +22,15 @@
                     <a class="nav-link" href="/cardDatabase">Card Database</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/contact">Contact us</a>
+                    <a class="nav-link active" href="/contact">Contact</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/login">Inloggen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link" href="/register">Registreren</a>
                 </li>
             </ul>
         </div>

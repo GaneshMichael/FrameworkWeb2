@@ -26,9 +26,9 @@ $currentUrl = $_SERVER['REQUEST_URI'];
     <?php if (!Auth::isGuest()) : ?>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Dashboard</a>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/dashboard">Dashboard</a>-->
+<!--                </li>-->
                 <li class="nav-item">
                     <a class="nav-link" href="/decks">Decks</a>
                 </li>
@@ -36,7 +36,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                     <a class="nav-link" href="/cardDatabase">Card Database</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/contact">Contact us</a>
+                    <a class="nav-link active" href="/contact">Contact</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -46,11 +46,11 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                     </li>
                 <?php elseif (Auth::isAdmin()) : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin">Admin</a>
+                        <a class="nav-link" href="/admin">Beheer</a>
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/logout">Uitloggen</a>
                 </li>
             </ul>
 
