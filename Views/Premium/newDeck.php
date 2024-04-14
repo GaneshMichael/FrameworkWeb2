@@ -33,7 +33,8 @@ $user_id = Application::$app->user->id;
         <input type="text" class="form-control" id="name" name="name" value="<?= isset($model->name) ? $model->name : ''; ?>" required>
     </div>
 
-    <p class="text-center">Selecteer hier je kaarten</p>
+    <p class="text-center">Selecteer hier je kaarten om je deck samen te stellen</p>
+    <p class="text-center">Er is een limiet van 15 kaarten per deck</p>
 
     <div class="row p-3">
         <?php foreach ($cards as $card) : ?>
