@@ -15,7 +15,16 @@ class DeckModel extends DatabaseModel
     public $created_at;
     public $updated_at;
 
+    // Define validation rules for deck attributes.
+    public function rules(): array
+    {
+        return [
+            'name' => [Validation::RULE_REQUIRED],
+            'cards' => [Validation::RULE_REQUIRED]
+        ];
 
+        return $rules;
+    }
 
     // Get the table name for the decks.
     public static function tableName(): string
@@ -48,16 +57,14 @@ class DeckModel extends DatabaseModel
         return 'id';
     }
 
-    // Define validation rules for deck attributes.
-    public function rules(): array
+    // Get the labels for the deck attributes.
+    public function labels(): array
     {
         return [
-            'name' => [Validation::RULE_REQUIRED],
-            'cards' => [Validation::RULE_REQUIRED]
-            // Add validation rules for other attributes if needed
+            'name' => 'Naam',
+            'cards' => 'Cards[]'
         ];
     }
-
 
     public function getCardNames(): array
     {
@@ -78,6 +85,4 @@ class DeckModel extends DatabaseModel
         $user = UserModel::findOne(['id' => $this->user_id]);
         return $user ? $user->displayName() : '';
     }
-
-
 }

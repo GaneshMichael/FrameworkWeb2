@@ -40,13 +40,16 @@ class DeckController extends Controller
 
         $deck->cards = implode(',', $_POST['cards'] ?? []);
 
-        $isValidationSuccessful = $deck->validate();
+        if ($request->isPost()) {
+            $isValidationSuccessful = $deck->validate();
 
-        if ($isValidationSuccessful && $deck->register()) {
-            Application::$app->session->setFlash('success', 'Deck succesvol aangemaakt.');
-            return $response->redirect('/decks');
-        } else {
-            Application::$app->session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
+            if ($isValidationSuccessful && $deck->register()) {
+                Application::$app->session->setFlash('success', 'Deck succesvol aangemaakt.');
+                return $response->redirect('/decks');
+            } else {
+                Application::$app->session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
+                return $response->redirect('/decks/newDeck');
+            }
         }
     }
 }

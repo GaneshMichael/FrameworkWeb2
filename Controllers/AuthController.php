@@ -64,6 +64,7 @@ class AuthController extends Controller
                 return $response->redirect('/dashboard');
             } else {
                 Application::$app->session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
+                return $response->redirect('/register');
             }
         }
         if (Application::$app->user) {

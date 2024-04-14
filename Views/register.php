@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($model->validate() && $model->register()) {
         $session->setFlash('success', 'Account created successfully.');
-        return $this->redirect('/Dashboard');
+        return $this->redirect('/');
     } else {
         $session->setFlash('error', 'Er is een fout opgetreden. Probeer het opnieuw.');
     }

@@ -30,7 +30,7 @@ $app->router->get('/cardDatabase', [CardController::class, 'index']);
 $app->router->get('/decks/newDeck', [DeckController::class, 'newDeck'], PremiumMiddleware::class);
 
 // Aanmaken van een deck
-$app->router->post('/decks/newDeck', [DeckController::class, 'create'], AuthMiddleware::class, PremiumMiddleware::class);
+$app->router->post('/decks/newDeck', [DeckController::class, 'create'], PremiumMiddleware::class, PremiumMiddleware::class);
 
 // Bewerken van een deck
 $app->router->get('/decks/{id}/edit', [DeckController::class, 'edit'], AuthMiddleware::class, PremiumMiddleware::class);

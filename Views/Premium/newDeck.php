@@ -1,5 +1,8 @@
 <?php
 
+/** @var $model \TCG\Models\DeckModel
+ */
+
 use TCG\core\Application;
 use TCG\Models\DeckModel;
 
@@ -8,6 +11,7 @@ $model = new DeckModel();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $model->loadData($_POST);
+
     if ($model->validate() && $model->register()) {
         $session->setFlash('success', 'Deck succesvol aangemaakt.');
         return $this->redirect('/decks');
@@ -22,14 +26,14 @@ $user_id = Application::$app->user->id;
 
 <h1 class="text-center">Stel je deck samen</h1>
 
-<p class="text-center">Selecteer hier je kaarten</p>
-
 <form method="post">
     <!-- Voeg een veld toe voor de naam van het deck -->
     <div class="form-group">
-        <label for="deck_name">Deck Naam</label>
-        <input type="text" class="form-control" id="deck_name" name="name"> <!-- Verander de naam naar "name" -->
+        <label for="name">Naam</label>
+        <input type="text" class="form-control" id="name" name="name" value="<?= isset($model->name) ? $model->name : ''; ?>" required>
     </div>
+
+    <p class="text-center">Selecteer hier je kaarten</p>
 
     <div class="row p-3">
         <?php foreach ($cards as $card) : ?>
@@ -46,8 +50,7 @@ $user_id = Application::$app->user->id;
                         <p class="card-text">Marktwaarde: <?= $card->marketValue ?></p>
                         <input type="checkbox" name="cards[]" value="<?= $card->id ?>"> Voeg toe aan deck
                         <br>
-                        <input type="checkbox" name="cards[]" value="<?= $card->id ?>"> voeg toe aan deck
-
+                        <input type="checkbox" name="cards[]" value="<?= $card->id ?>"> Voeg toe aan deck
                     </div>
                 </div>
             </div>
