@@ -37,6 +37,55 @@ class CardModel extends DatabaseModel
         ];
     }
 
+// Retrieve all objects from the database table based on filter parameters.
+    public static function findAllObjects($nameFilter = null, $rarityFilter = null, $typeFilter = null): array
+    {
+        $tableName = static::tableName();
+        $db = self::getDb();
+        $conditions = [];
+        $params = [];
+
+        // Add conditions based on filter parameters
+        if ($nameFilter !== null) {
+            $conditions[] = 'name LIKE :name';
+            $params[':name'] = "%$nameFilter%";
+        }
+        if ($rarityFilter !== null) {
+            if ($rarityFilter === '') {
+                // If "Alle" is selected, do not apply rarity filter
+            } else {
+                $conditions[] = 'rarity = :rarity';
+                $params[':rarity'] = $rarityFilter;
+            }
+        }
+        if ($typeFilter !== null) {
+            if ($typeFilter === '') {
+                // If "Alle" is selected, do not apply type filter
+            } else {
+                $conditions[] = 'type = :type';
+                $params[':type'] = $typeFilter;
+            }
+        }
+
+        // Construct the SQL query with conditions
+        $sql = "SELECT * FROM $tableName";
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(' AND ', $conditions);
+        }
+
+        // Prepare and execute the query
+        $statement = $db->prepare($sql);
+        $statement->execute($params);
+
+        // Fetch objects and return them
+        $objects = [];
+        while ($row = $statement->fetchObject(static::class)) {
+            $objects[] = $row;
+        }
+        return $objects;
+    }
+
+
     public function update(): bool
     {
         $this->created_at = date('Y-m-d H:i:s');

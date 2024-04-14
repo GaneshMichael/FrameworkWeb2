@@ -11,14 +11,17 @@ class CardController extends Controller
     // Renders the card database page.
     public function index()
     {
-        $cards = CardModel::findAllObjects();
+        // Ontvang filterparameters
+        $nameFilter = $_GET['name'] ?? null; //
+        $rarityFilter = $_GET['rarity'] ?? null;
+        $typeFilter = $_GET['type'] ?? null;
+
+        // Roep de methode aan om kaarten op te halen met filterparameters
+        $cards = CardModel::findAllObjects($nameFilter, $rarityFilter, $typeFilter);
+
+        // Render de weergave met de gefilterde kaarten
         $this->view->title = 'Card database';
-        if (Application::$app->user) {
-            $this->view->render('cardDatabase', [
-                'cards' => $cards], 'auth');
-        } else {
-            $this->view->render('cardDatabase', [
-                'cards' => $cards], 'base');
-        }
+        $this->view->render('cardDatabase', ['cards' => $cards]);
     }
+
 }
