@@ -15,9 +15,10 @@ class CardController extends Controller
         $nameFilter = $_GET['name'] ?? null; //
         $rarityFilter = $_GET['rarity'] ?? null;
         $typeFilter = $_GET['type'] ?? null;
+        $setFilter = $_GET['set'] ?? null;
 
         // Roep de methode aan om kaarten op te halen met filterparameters
-        $cards = CardModel::findAllObjects($nameFilter, $rarityFilter, $typeFilter);
+        $cards = CardModel::findAllObjects($nameFilter, $rarityFilter, $typeFilter, $setFilter);
 
         // Render de weergave met de gefilterde kaarten
         $this->view->title = 'Card database';

@@ -38,7 +38,7 @@ class CardModel extends DatabaseModel
     }
 
 // Retrieve all objects from the database table based on filter parameters.
-    public static function findAllObjects($nameFilter = null, $rarityFilter = null, $typeFilter = null): array
+    public static function findAllObjects($nameFilter = null, $rarityFilter = null, $typeFilter = null, $setFilter = null): array
     {
         $tableName = static::tableName();
         $db = self::getDb();
@@ -64,6 +64,14 @@ class CardModel extends DatabaseModel
             } else {
                 $conditions[] = 'type = :type';
                 $params[':type'] = $typeFilter;
+            }
+        }
+        if ($setFilter !== null) {
+            if ($setFilter === '') {
+                // If "Alle" is selected, do not apply set filter
+            } else {
+                $conditions[] = 'cardSet = :cardSet';
+                $params[':cardSet'] = $setFilter;
             }
         }
 

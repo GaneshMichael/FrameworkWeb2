@@ -36,6 +36,16 @@ $this->title = 'Speelkaarten Database';
         <option value="Spirit">Spirit</option>
     </select>
 
+    <!-- Filter voor kaartset -->
+    <label for="set">Kaartset:</label>
+    <select id="set" name="set">
+        <option value="">Alle</option>
+        <option value="Tensei">Tensei</option>
+        <option value="Shadow Garden">Shadow Garden</option>
+        <option value="Demon Slayer">Demon Slayer</option>
+        <option value="Slimes">Slimes</option>
+    </select>
+
     <!-- Filterknop -->
     <button type="submit">Filteren</button>
 </form>
