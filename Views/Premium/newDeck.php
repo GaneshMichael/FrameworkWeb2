@@ -65,4 +65,34 @@ $user_id = Application::$app->user->id;
         var cardInput = document.querySelector('input[name="cards[]"][value="' + cardId + '"]');
         cardInput.checked = isChecked;
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.querySelector('form');
+        var checkboxes = document.querySelectorAll('input[name="cards[]"]');
+        var selectedCount = 0;
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    selectedCount++;
+                } else {
+                    selectedCount--;
+                }
+
+                if (selectedCount > 15) {
+                    alert("Je kunt maximaal 15 kaarten selecteren.");
+                    this.checked = false;
+                    selectedCount--;
+                }
+            });
+        });
+
+        form.addEventListener('submit', function(event) {
+            if (selectedCount > 15) {
+                alert("Je kunt maximaal 15 kaarten selecteren.");
+                event.preventDefault(); // Voorkom formulier verzending
+            }
+        });
+    });
+
 </script>
